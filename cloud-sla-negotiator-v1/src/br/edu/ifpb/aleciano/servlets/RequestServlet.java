@@ -161,17 +161,16 @@ public class RequestServlet extends HttpServlet {
 	}
 
 	private /*static*/ KnowledgeBase readKnowledgeBase() throws Exception {
-		//System.out.println("Chega aqui");
+		
 		KnowledgeBuilder kbuilder = KnowledgeBuilderFactory
 				.newKnowledgeBuilder();
 		
+		/* Ler de um arquivo */
 		kbuilder.add(ResourceFactory
 				.newFileResource(cx.getRealPath("/") + /*"WEB-INF/" +*/"regras.drl"),
 				ResourceType.DRL);
-		/*kbuilder.add(ResourceFactory
-				.newClassPathResource(cx.getRealPath("/") + "WEB-INF/" +"regras.drl"),
-				ResourceType.DRL);*/
-		//"estrategias-regras-v1.drl"
+		
+		
 		KnowledgeBuilderErrors errors = kbuilder.getErrors();
 		if (errors.size() > 0) {
 			for (KnowledgeBuilderError error : errors) {

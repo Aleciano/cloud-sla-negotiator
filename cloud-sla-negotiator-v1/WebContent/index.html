@@ -3,13 +3,37 @@
 <head>
 <meta http-equiv="Content-Type" charset="UTF-8" content="text/html; charset=UTF-8">
 <title>Solicite a sua instância</title>
+  <style type="text/css">
+    p { color: red; text-align: center; }
+    a { color: blue; }
+    body {background-color:#b0c4ff; text-align: center;} 
+       
+.center
+{
+margin:auto;
+width:40%;
+background-color:#c0c4ff;
+border-width: 150px;
+}
+input[type=submit] {
+    height: 70px;
+     width: 200px;
+     font-size: 24px;
+}
+.baixo
+{
+margin:auto;
+vertical-align: sub;
+}
+  </style>
 </head>
 <body>
-	<h2>Informe os seus requisitos</h2>
+	<div class="center">
+	<h2>Informe os seus requisitos<br></h2>
 		
 	<form action="requestservlet" method="post">
 		
-		<b>:: Requisitos da infraestrutura EC2 :: </b><br><br>
+		<h3>:: Requisitos da infraestrutura EC2 :: </h3><br>
 		
 		Tipo de instância: 
 		<select name="instancias" size="1" nome>
@@ -22,7 +46,7 @@
 		Nº instâncias: <input type="text" name="numinstancias"
 			value="4" onclick="this.value='';" /><br><br>
 		<!--hr size="100" width="1" align="left"-->
-		<b>Opções de contexto</b><br><br>
+		<b><u>Opções de contexto</u></b><br><br>
 		<input type="checkbox" name="context" value="immediateAccess" checked /> Acesso Imediato <!--input type="text" name="context_immediateAccess"  /--><br>
 		<input type="checkbox" name="context" value="shortDuration" /> Duração curta <!--input type="text" name="context_shortDuration"  /--><br>
 		<input type="checkbox" name="context" value="uninterruptedAccess" /> Acesso ininterrupto  <!--input type="text" name="context_uninterruptedAccess"  /--><br>		
@@ -44,7 +68,11 @@
 		<input type="text" name="key"  /><br>
 		
 		
-		<br><br><input type="submit" name="Enviar" value="Enviar" />		
+		<br><br><input type="submit" name="Enviar" value="Enviar" />	
+		</div>		
 	</form>
+	<div class="baixo">
+		Copyright © 2013
+	</div>
 </body>
 </html>
