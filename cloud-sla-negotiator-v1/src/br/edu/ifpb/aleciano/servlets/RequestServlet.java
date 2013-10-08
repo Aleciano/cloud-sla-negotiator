@@ -1,0 +1,90 @@
+package br.edu.ifpb.aleciano.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import br.edu.ifpb.aleciano.entidades.AmazonContext;
+import br.edu.ifpb.aleciano.interfaces.Context;
+
+import com.google.gson.Gson;
+
+/**
+ * Servlet implementation class RequestServlet
+ */
+public class RequestServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public RequestServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		
+		out.println("<!DOCTYPE HTML><html lang=\"pt-br\"><head><meta charset=\"ISO-8859-1\"><title>Novo registro: resultado</title></head><body>");
+		
+		out.println("<b>Resultados:</b><br><br>");
+		
+		Context context = createContextByArgs(request);
+		out.println(context.toString());
+		System.out.println(context.toString());
+		
+		out.println(request.getParameter("login"));
+		out.println(request.getParameter("key"));
+		out.println("</body></html>");
+		
+		
+	}
+
+	/*
+	 * Cria objeto Contexto de acordo com os parâmetros recebidos pela interface web.
+	 */
+	private Context createContextByArgs(HttpServletRequest request) {
+		
+		String contextValues[] = request.getParameterValues("context"); // Recebe parâmetros "marcáveis" via caixa de marcação (checkbox) html.
+		String json = "{"; // Inicia String do Json
+		
+		/*
+		 * Varre os parâmetros que foram marcados na página html e atribui a string 'true'.
+		 * Posteriormente, o Json irá atribuir o valor booleano true ao atributo do objeto. 
+		 */
+		for(String value: contextValues){
+			json += " '" + value + "' : 'true'," ;
+		}
+		
+		/*
+		 * Atribui o restante dos parâmetros.
+		 */
+		json += " 'instancesNum' : '" + Integer.parseInt( request.getParameter("numinstancias") ) + "',"
+	                + " 'instanceType' : '" + request.getParameter("instancias") + "' ,"
+	                + " 'geoZone' : '" + Integer.parseInt(request.getParameter("locgeografica") ) + "'"
+	                +"}";
+		
+		
+		/*
+		 * Parte que faz o parser convertendo a String formatada para o objeto da classe informada. 
+		 */
+		AmazonContext context = new Gson().fromJson(json, AmazonContext.class);
+		
+		
+		return context;
+	}
+}
