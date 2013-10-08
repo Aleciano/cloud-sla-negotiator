@@ -116,7 +116,14 @@ public class AmazonContext implements Context{
 		this.instanceType = instanceType;
 	}
 
+	public int getGeoZone() {
+		return geoZone;
+	}
 
+	public void setGeoZone(int geoZone) {
+		this.geoZone = geoZone;
+	}
+	
 	@Override
 	public String toString() {
 		return "AmazonContext [immediateAccess=" + immediateAccess

@@ -2,6 +2,7 @@
     <wb-module deploy-name="cloud-sla-negotiator-v1">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/rules"/>
         <property name="context-root" value="autosla"/>
         <property name="java-output-path" value="/cloud-sla-negotiator-v1/build/classes"/>
     </wb-module>
