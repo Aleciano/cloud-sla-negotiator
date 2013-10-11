@@ -1,0 +1,93 @@
+package br.edu.ifpb.aleciano.regras;
+
+import br.edu.ifpb.aleciano.entidades.AmazonContext;
+import br.edu.ifpb.aleciano.entidades.EngineReq;
+import br.edu.ifpb.aleciano.interfaces.Strategy;
+import br.edu.ifpb.aleciano.entidades.OnDemand;
+import br.edu.ifpb.aleciano.entidades.PriceMomentum;
+import br.edu.ifpb.aleciano.entidades.CostOptimization;
+import br.edu.ifpb.aleciano.entidades.MinimizeInterruption;
+import br.edu.ifpb.aleciano.entidades.ImmediateAcess;
+ 
+rule "Immediate Access for Short Duration"
+	//no-loop true
+	//lock-on-active true
+    when
+    	$context: AmazonContext( (immediateAccess == true) && (shortDuration == true) )
+      	//Context( (uninterruptedAccess == false) && (minimizeCompletionTime == false ) && (minimizeCost == false) )
+      	$eng : EngineReq();
+     	// Avalia se já existe a estratégia na engine, caso sim, não insere novamente.
+     	eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.OnDemand.class) == false)   
+    then
+        //System.out.println("\"Immediate Access for short duration\" ACTIVATED.");
+        Strategy strat = new br.edu.ifpb.aleciano.entidades.OnDemand($context);
+        
+        $eng.setStrategy(strat);
+        update($eng);
+                
+end
+
+rule "Minimize Job completion time and costraint"
+    //no-loop true
+    when
+       $context: AmazonContext( (minimizeCompletionTime == true) && (minimizeCost == true) )
+       //Context ( (immediateAccess == false) && ( shortDuration == false) && (uninterruptedAccess == false) )
+       $eng : EngineReq();
+       eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.PriceMomentum.class) == false)
+       
+    then
+        //System.out.println("\"Minimize Job completion time and cost\" ACTIVATED.");
+        Strategy strat = new br.edu.ifpb.aleciano.entidades.PriceMomentum($context);
+        
+        $eng.setStrategy(strat);
+        update($eng);       
+end
+
+rule "Minimize Cost and Job completion Time not a constraint"
+    //no-loop true
+    when
+       $context: AmazonContext( (shortDuration == true) && (minimizeCost == true) )
+       //Context ( (immediateAccess == false) && (uninterruptedAccess == false) && (minimizeCompletionTime == false ))
+       $eng : EngineReq();
+       eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.CostOptimization.class) == false)
+       
+    then
+        //System.out.println("\"Minimize Cost and Job completion Time not a constraint\" ACTIVATED.");
+        Strategy strat = new br.edu.ifpb.aleciano.entidades.CostOptimization($context);
+        
+        $eng.setStrategy(strat);
+        update($eng);      
+end
+
+rule "Uninterrupted Access with Minimum Cost"
+    //no-loop true
+    when
+       $context: AmazonContext( (uninterruptedAccess == true) && (minimizeCost == true) )
+       //Context ( (immediateAccess == false) && ( shortDuration == false) && (minimizeCompletionTime == false ))
+       $eng : EngineReq();
+       eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.MinimizeInterruption.class) == false)
+   	then
+        //System.out.println("\"Uninterrupted Acess with Minimum Cost\" ACTIVATED.");
+		Strategy strat = new br.edu.ifpb.aleciano.entidades.MinimizeInterruption($context);
+        
+        $eng.setStrategy(strat);
+        update($eng);               
+end
+
+rule "Immediate Access to Instance"
+	//lock-on-active true
+	//no-loop true
+    when
+       $context: AmazonContext( (immediateAccess == true) )
+       //Context ((uninterruptedAccess == false) && (minimizeCompletionTime == false ) && (minimizeCost == false) && (shortDuration == false))
+       $eng : EngineReq();
+       eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.ImmediateAcess.class) == false)
+       //eval($context instanceof Context)
+    then
+        //System.out.println("\"Immediate Acess to Instance ACTIVATED");
+        Strategy strat = new br.edu.ifpb.aleciano.entidades.ImmediateAcess($context);
+        
+        $eng.setStrategy(strat);
+        update($eng);
+               
+end

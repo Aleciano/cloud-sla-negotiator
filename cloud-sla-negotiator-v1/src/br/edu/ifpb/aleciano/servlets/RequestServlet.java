@@ -80,6 +80,15 @@ public class RequestServlet extends HttpServlet {
 			session.setAttribute("engine", engine);
 
 			Context context = createContextByArgs(request);
+			if (context==null){
+				RequestDispatcher r = request
+						.getRequestDispatcher("WEB-INF/results.jsp");
+				request.setCharacterEncoding("UTF-8");
+				
+				request.setAttribute("strategy", null);
+				r.forward(request, response);
+			}
+			else{
 			try {
 				// load up the knowledge base
 				KnowledgeBase kbase = readKnowledgeBase();
@@ -133,6 +142,7 @@ public class RequestServlet extends HttpServlet {
 				}
 			} catch (Throwable t) {
 				t.printStackTrace();
+			}
 			}
 			break;
 		}
@@ -190,6 +200,7 @@ public class RequestServlet extends HttpServlet {
 																		// marcação
 																		// (checkbox)
 																		// html.
+		if (contextValues==null) return null;
 		String json = "{"; // Inicia String do Json
 
 		/*

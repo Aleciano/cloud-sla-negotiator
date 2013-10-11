@@ -1,0 +1,64 @@
+package br.edu.ifpb.aleciano.regras;
+
+import br.edu.ifpb.aleciano.entidades.AmazonContext;
+import br.edu.ifpb.aleciano.entidades.EngineReq;
+import br.edu.ifpb.aleciano.interfaces.Strategy;
+import br.edu.ifpb.aleciano.entidades.OnDemand;
+import br.edu.ifpb.aleciano.entidades.PriceMomentum;
+import br.edu.ifpb.aleciano.entidades.CostOptimization;
+import br.edu.ifpb.aleciano.entidades.MinimizeInterruption;
+import br.edu.ifpb.aleciano.entidades.ImmediateAcess;
+ 
+rule "Immediate Access for Short Duration"
+	when
+    	$context: AmazonContext( (immediateAccess == true) && (shortDuration == true) )
+      	$eng : EngineReq();
+     	// Avalia se já existe a estratégia na engine, caso sim, não insere novamente.
+     	eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.OnDemand.class) == false)   
+    then
+        $eng.setStrategy($context, br.edu.ifpb.aleciano.entidades.OnDemand.class);
+        update($eng);
+                
+end
+
+rule "Minimize Job completion time and costraint"
+    when
+       $context: AmazonContext( (minimizeCompletionTime == true) && (minimizeCost == true) )
+       $eng : EngineReq();
+       eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.PriceMomentum.class) == false)
+       
+    then
+        $eng.setStrategy($context, br.edu.ifpb.aleciano.entidades.PriceMomentum.class);
+        update($eng);       
+end
+
+rule "Minimize Cost and Job completion Time not a constraint"
+    when
+       $context: AmazonContext( (shortDuration == true) && (minimizeCost == true) )
+       $eng : EngineReq();
+       eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.CostOptimization.class) == false)
+    then
+        $eng.setStrategy($context, br.edu.ifpb.aleciano.entidades.CostOptimization.class);
+        update($eng);      
+end
+
+rule "Uninterrupted Access with Minimum Cost"
+    when
+       $context: AmazonContext( (uninterruptedAccess == true) && (minimizeCost == true) )
+       $eng : EngineReq();
+       eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.MinimizeInterruption.class) == false)
+   	then
+        $eng.setStrategy($context, br.edu.ifpb.aleciano.entidades.MinimizeInterruption.class);
+        update($eng);               
+end
+
+rule "Immediate Access to Instance"
+	when
+       $context: AmazonContext( (immediateAccess == true) )
+       $eng : EngineReq();
+       eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.ImmediateAcess.class) == false)
+ 	then
+       	$eng.setStrategy($context, br.edu.ifpb.aleciano.entidades.ImmediateAcess.class);
+       	update($eng);
+               
+end
