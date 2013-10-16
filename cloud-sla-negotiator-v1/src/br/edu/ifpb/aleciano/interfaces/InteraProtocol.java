@@ -6,5 +6,16 @@ package br.edu.ifpb.aleciano.interfaces;
 public interface InteraProtocol {
 
 	String getName();
+	String getVersion();
+	
+	boolean makeProposal(Object data);
+	void rejectInteration();
+	void rejectProposal();
+	boolean acceptProposal();
+	
+	
+	
+	
+	
 
 }

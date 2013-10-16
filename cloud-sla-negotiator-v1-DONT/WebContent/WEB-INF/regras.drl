@@ -3,6 +3,7 @@ package br.edu.ifpb.aleciano.regras;
 import br.edu.ifpb.aleciano.entidades.AmazonContext;
 import br.edu.ifpb.aleciano.entidades.EngineReq;
 import br.edu.ifpb.aleciano.interfaces.Strategy;
+import br.edu.ifpb.aleciano.interfaces.InteraProtocol;
 import br.edu.ifpb.aleciano.entidades.estrategias.OnDemand;
 import br.edu.ifpb.aleciano.entidades.estrategias.PriceMomentum;
 import br.edu.ifpb.aleciano.entidades.estrategias.CostOptimization;
@@ -10,15 +11,25 @@ import br.edu.ifpb.aleciano.entidades.estrategias.MinimizeInterruption;
 import br.edu.ifpb.aleciano.entidades.estrategias.ImmediateAndUnintAcess;
  
 rule "Immediate Access for Short Duration"
+	no-loop true
+	lock-on-active 
 	when
     	$context: AmazonContext( (immediateAccess == true) && (shortDuration == true) )
-      	$eng : EngineReq();
+    	$strategy: Strategy(  );
+    	$protocol: InteraProtocol(  );
+      	//$eng : EngineReq();
      	// Avalia se já existe a estratégia na engine, caso sim, não insere novamente.
-     	eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.estrategias.OnDemand.class) == false)   
+     	//eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.estrategias.OnDemand.class) == false)   
     then
-    	$eng.setProtocol(br.edu.ifpb.aleciano.entidades.protocolos.FixedPriceProto.class);
-        $eng.setStrategy($context, br.edu.ifpb.aleciano.entidades.estrategias.OnDemand.class);
-        update($eng);
+    	//$eng.setProtocol(br.edu.ifpb.aleciano.entidades.protocolos.FixedPriceProto.class);
+       	// $eng.setStrategy($context, br.edu.ifpb.aleciano.entidades.estrategias.OnDemand.class);
+       	System.out.printf("\nInside ruels!");
+       	$strategy = new br.edu.ifpb.aleciano.entidades.estrategias.OnDemand($context);
+       	$protocol = new br.edu.ifpb.aleciano.entidades.protocolos.FixedPriceProto();
+       	//$strategy.setContext($context)
+       	//$protocol = proto;
+        update($strategy);
+        update($protocol);
                 
 end
 

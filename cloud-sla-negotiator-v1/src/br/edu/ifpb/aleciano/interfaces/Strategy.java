@@ -15,5 +15,5 @@ public interface Strategy {
 	/*
 	 * Simula os parâmetros recebidos pelas APIs públicas da Amazon.
 	 */
-	boolean writeLog(String destination, ArrayList<String> argv);
+	//boolean writeLog(String destination, ArrayList<String> argv);
 }

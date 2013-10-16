@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="br.edu.ifpb.aleciano.interfaces.Strategy;"%>
@@ -6,11 +6,11 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Auto-SLA: ativação da instância</title>
 <style type="text/css">
 p {
-	color: red;
+	color: blue;
 	text-align: center;
 }
 
@@ -43,33 +43,33 @@ input[type=submit] {
 </style>
 </head>
 <body>
-
+	<div class="center">
 	<%
 		String conflict = (String) request.getAttribute("conflict");
 
 		if (conflict.equals("yes")) {
 			//		if (session.getAttribute("conflict") != null) {
 	%>
-	<h2>Escolha UMA dentre as seguintes estratégias:</h2>
+	<h3><br><font color="MidnightBlue ">:: Escolha a estratégia de negociação ::</font></h3>
 	<!-- Um if pra ver se é pra exibir a seleção ou só o nome da ÚNICA estratégia identificada -->
 	<%
 		ArrayList<Strategy> strategies = (ArrayList<Strategy>) request
 					.getAttribute("strategies");
-			out.print("<p>Escolha uma entre as estratégias disponíveis:</p>");
+			out.print("<p>Opções:</p>");
 			out.print("<form action=\"requestservlet\" method=\"post\">");
 			int i = 0;
 			for (Strategy aux : strategies) {
 				//out.println("<br>" + aux.toString() + "<br>");
 				out.print("<input type=\"radio\" name=\"strategy_index\" value=\""
 						+ Integer.toString(i++)
-						+ "\"/> "
+						+ "\" checked/> "
 						+ aux.getName()
 						+ "<br>");
 			}
 	%>
 	<%
 		} else {
-			out.print("<p>Ativar estratégia?</p>");
+			out.print("<h3><font color=\"MidnightBlue \"><br><br>Ativar estratégia?</font></h3>");
 			out.print("<form action=\"requestservlet\" method=\"post\">");
 			ArrayList<Strategy> strategies = (ArrayList<Strategy>) request
 					.getAttribute("strategies");
@@ -79,10 +79,11 @@ input[type=submit] {
 		}
 	%>
 	<%
-		out.print("<br><br><input type=\"submit\" name=\"Ativar\" value=\"activate\" />");
+		out.print("<br><br><input type=\"submit\" name=\"Ativar\" value=\"Ativar\" />");
 		out.print("<input type=\"hidden\" name=\"flag\" value=\"selection\">");
 		out.print("</form>");
 	%>
 	<!-- Exibe o botão de Ativar, é um form também que manda um hidden com o nome de selection -->
+	</div>
 </body>
 </html>

@@ -6,7 +6,7 @@
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Auto-SLA: Negociação em andamento</title>
 <style type="text/css">
 p {
@@ -43,19 +43,20 @@ input[type=submit] {
 </style>
 </head>
 <body>
+	<div class="center">
 	<%
 		Strategy strategy = (Strategy) request.getAttribute("strategy");
 		
 		if(strategy!=null){
-		out.print("<h3>Estratégia " + strategy.getName() + " ativada.</h3><br><br>");
+		out.print("<h3><font color=\"MidnightBlue \"><br><br>Estratégia '" + strategy.getName() + "' ativa!</font></h3><br><br>");
 
-		out.print("<p>Negociação em andamento...</p>");
+		out.print("<p>Negociação em andamento...</p><br><br>");
 		}
 		else{
 			
-			out.print("<p>Não houve estratégias aplicáveis</p>");
+			out.print("<br><br><p>Não houve estratégias aplicáveis<br>	Por favor, refine a pesquisa.</p><br><br>");
 		}
 	%>
-
+	</div>
 </body>
 </html>

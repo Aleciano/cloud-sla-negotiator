@@ -65,17 +65,7 @@ public class RequestServlet extends HttpServlet {
 		switch (flag) {
 		case "login": {
 			HttpSession session = request.getSession();
-			/*
-			 * out.println(
-			 * "<!DOCTYPE HTML><html lang=\"pt-br\"><head><meta charset=\"ISO-8859-1\"><title>Novo registro: resultado</title></head><body>"
-			 * );
-			 * 
-			 * out.println("<b>Resultados:</b><br><br>");
-			 */
-
-			/*
-			 * Cria uma engine e adiciona como atributo na sessão. SEMPRE.
-			 */
+			
 			EngineReq engine = new EngineReq();
 			session.setAttribute("engine", engine);
 
@@ -164,6 +154,7 @@ public class RequestServlet extends HttpServlet {
 						engine.getStrategies().get(index));
 				request.setAttribute("strategy",
 						engine.getStrategies().get(index));
+				
 				RequestDispatcher r = request
 						.getRequestDispatcher("WEB-INF/results.jsp");
 				request.setCharacterEncoding("UTF-8");
