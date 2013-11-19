@@ -1,100 +1,156 @@
 <uml>
    <greenVersion="30500"/>
    <type>
-      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{ImmediateAcess.java[ImmediateAcess"/>
-      <height="168"/>
-      <width="299"/>
-      <x="638"/>
-      <y="455"/>
-   </type>
-   <type>
-      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{CostOptimization.java[CostOptimization"/>
-      <height="170"/>
-      <width="259"/>
-      <x="50"/>
-      <y="453"/>
-   </type>
-   <type>
-      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{OnDemand.java[OnDemand"/>
-      <height="172"/>
-      <width="281"/>
-      <x="346"/>
-      <y="449"/>
-   </type>
-   <type>
       <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{EngineReq.java[EngineReq"/>
-      <height="404"/>
-      <width="337"/>
-      <x="1163"/>
-      <y="-2"/>
-   </type>
-   <type>
-      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{MinimizeInterruption.java[MinimizeInterruption"/>
-      <height="170"/>
-      <width="261"/>
-      <x="953"/>
-      <y="458"/>
-   </type>
-   <type>
-      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{AmazonContext.java[AmazonContext"/>
-      <height="282"/>
-      <width="295"/>
-      <x="657"/>
-      <y="721"/>
-   </type>
-   <type>
-      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{PriceMomentum.java[PriceMomentum"/>
-      <height="172"/>
-      <width="275"/>
-      <x="1283"/>
-      <y="447"/>
+      <height="19"/>
+      <width="277"/>
+      <x="873"/>
+      <y="127"/>
    </type>
    <type>
       <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{Strategy.java[Strategy"/>
-      <height="-1"/>
-      <width="-1"/>
-      <x="465"/>
-      <y="181"/>
+      <height="21"/>
+      <width="246"/>
+      <x="707"/>
+      <y="233"/>
    </type>
    <type>
       <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{InteraProtocol.java[InteraProtocol"/>
-      <height="-1"/>
-      <width="-1"/>
-      <x="114"/>
-      <y="196"/>
+      <height="22"/>
+      <width="276"/>
+      <x="1052"/>
+      <y="233"/>
    </type>
    <type>
       <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{Context.java[Context"/>
-      <height="-1"/>
-      <width="-1"/>
-      <x="260"/>
-      <y="820"/>
+      <height="18"/>
+      <width="274"/>
+      <x="-109"/>
+      <y="403"/>
+   </type>
+   <type>
+      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{MinimizeInterruption.java[MinimizeInterruption"/>
+      <height="20"/>
+      <width="377"/>
+      <x="199"/>
+      <y="19"/>
+   </type>
+   <type>
+      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{PriceMomentum.java[PriceMomentum"/>
+      <height="19"/>
+      <width="356"/>
+      <x="208"/>
+      <y="318"/>
+   </type>
+   <type>
+      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{CostOptimization.java[CostOptimization"/>
+      <height="20"/>
+      <width="358"/>
+      <x="204"/>
+      <y="410"/>
+   </type>
+   <type>
+      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{ImmediateAndUnintAcess.java[ImmediateAndUnintAcess"/>
+      <height="20"/>
+      <width="381"/>
+      <x="76"/>
+      <y="107"/>
+   </type>
+   <type>
+      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{OnDemand.java[OnDemand"/>
+      <height="20"/>
+      <width="326"/>
+      <x="202"/>
+      <y="205"/>
+   </type>
+   <type>
+      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.protocolos{SpotInstanceProto.java[SpotInstanceProto"/>
+      <height="20"/>
+      <width="361"/>
+      <x="1390"/>
+      <y="231"/>
+   </type>
+   <type>
+      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.protocolos{FixedPriceProto.java[FixedPriceProto"/>
+      <height="18"/>
+      <width="343"/>
+      <x="1311"/>
+      <y="318"/>
+   </type>
+   <type>
+      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.protocolos{DiscountedFixedPriceProto.java[DiscountedFixedPriceProto"/>
+      <height="20"/>
+      <width="405"/>
+      <x="1274"/>
+      <y="128"/>
+   </type>
+   <type>
+      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.servlets{RequestServlet.java[RequestServlet"/>
+      <height="19"/>
+      <width="400"/>
+      <x="834"/>
+      <y="28"/>
+   </type>
+   <type>
+      <name="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{AmazonContext.java[AmazonContext"/>
+      <height="20"/>
+      <width="283"/>
+      <x="-116"/>
+      <y="249"/>
    </type>
    <relationship>
       <class="edu.buffalo.cse.green.relationship.realization.RealizationPart"/>
-      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{OnDemand.java[OnDemand"/>
-      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{Strategy.java[Strategy"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.protocolos{DiscountedFixedPriceProto.java[DiscountedFixedPriceProto"/>
+      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{InteraProtocol.java[InteraProtocol"/>
       <bendpoints>
       </bendpoints>
    </relationship>
    <relationship>
       <class="edu.buffalo.cse.green.relationship.association.AssociationPart"/>
-      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{PriceMomentum.java[PriceMomentum"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{OnDemand.java[OnDemand"/>
+      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{AmazonContext.java[AmazonContext"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.dependency.DependencyLPart"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.servlets{RequestServlet.java[RequestServlet"/>
+      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{EngineReq.java[EngineReq"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.association.AssociationPart"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{CostOptimization.java[CostOptimization"/>
       <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{AmazonContext.java[AmazonContext"/>
       <bendpoints>
       </bendpoints>
    </relationship>
    <relationship>
       <class="edu.buffalo.cse.green.relationship.realization.RealizationPart"/>
-      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{ImmediateAcess.java[ImmediateAcess"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.protocolos{FixedPriceProto.java[FixedPriceProto"/>
+      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{InteraProtocol.java[InteraProtocol"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.realization.RealizationPart"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{OnDemand.java[OnDemand"/>
       <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{Strategy.java[Strategy"/>
       <bendpoints>
       </bendpoints>
    </relationship>
    <relationship>
-      <class="edu.buffalo.cse.green.relationship.association.AssociationPart"/>
-      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{ImmediateAcess.java[ImmediateAcess"/>
-      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{AmazonContext.java[AmazonContext"/>
+      <class="edu.buffalo.cse.green.relationship.realization.RealizationPart"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{CostOptimization.java[CostOptimization"/>
+      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{Strategy.java[Strategy"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.realization.RealizationPart"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{MinimizeInterruption.java[MinimizeInterruption"/>
+      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{Strategy.java[Strategy"/>
       <bendpoints>
       </bendpoints>
    </relationship>
@@ -106,44 +162,58 @@
       </bendpoints>
    </relationship>
    <relationship>
+      <class="edu.buffalo.cse.green.relationship.realization.RealizationPart"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.protocolos{SpotInstanceProto.java[SpotInstanceProto"/>
+      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{InteraProtocol.java[InteraProtocol"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
       <class="edu.buffalo.cse.green.relationship.association.AssociationPart"/>
-      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{MinimizeInterruption.java[MinimizeInterruption"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{ImmediateAndUnintAcess.java[ImmediateAndUnintAcess"/>
       <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{AmazonContext.java[AmazonContext"/>
       <bendpoints>
       </bendpoints>
    </relationship>
    <relationship>
       <class="edu.buffalo.cse.green.relationship.realization.RealizationPart"/>
-      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{MinimizeInterruption.java[MinimizeInterruption"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{ImmediateAndUnintAcess.java[ImmediateAndUnintAcess"/>
       <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{Strategy.java[Strategy"/>
       <bendpoints>
       </bendpoints>
    </relationship>
    <relationship>
       <class="edu.buffalo.cse.green.relationship.association.AssociationPart"/>
-      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{OnDemand.java[OnDemand"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{MinimizeInterruption.java[MinimizeInterruption"/>
       <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{AmazonContext.java[AmazonContext"/>
       <bendpoints>
       </bendpoints>
    </relationship>
    <relationship>
+      <class="edu.buffalo.cse.green.relationship.association.AssociationPart"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{PriceMomentum.java[PriceMomentum"/>
+      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{AmazonContext.java[AmazonContext"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.association.AssociationPart"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{EngineReq.java[EngineReq"/>
+      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{Strategy.java[Strategy"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
       <class="edu.buffalo.cse.green.relationship.realization.RealizationPart"/>
-      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{PriceMomentum.java[PriceMomentum"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades.estrategias{PriceMomentum.java[PriceMomentum"/>
       <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{Strategy.java[Strategy"/>
       <bendpoints>
       </bendpoints>
    </relationship>
    <relationship>
       <class="edu.buffalo.cse.green.relationship.association.AssociationPart"/>
-      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{CostOptimization.java[CostOptimization"/>
-      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{AmazonContext.java[AmazonContext"/>
-      <bendpoints>
-      </bendpoints>
-   </relationship>
-   <relationship>
-      <class="edu.buffalo.cse.green.relationship.realization.RealizationPart"/>
-      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{CostOptimization.java[CostOptimization"/>
-      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{Strategy.java[Strategy"/>
+      <sourceType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.entidades{EngineReq.java[EngineReq"/>
+      <targetType="=cloud-sla-negotiator-v1/src<br.edu.ifpb.aleciano.interfaces{InteraProtocol.java[InteraProtocol"/>
       <bendpoints>
       </bendpoints>
    </relationship>

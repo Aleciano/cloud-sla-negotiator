@@ -1,4 +1,4 @@
-package br.edu.ifpb.aleciano.interfaces;
+package br.edu.ifpb.mysla.interfaces;
 
 /*
  * Interface para um Protocolo de Interação

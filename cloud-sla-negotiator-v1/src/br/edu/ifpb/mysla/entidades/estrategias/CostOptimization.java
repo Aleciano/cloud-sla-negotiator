@@ -1,4 +1,4 @@
-package br.edu.ifpb.aleciano.entidades.estrategias;
+package br.edu.ifpb.mysla.entidades.estrategias;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,9 +7,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
-import br.edu.ifpb.aleciano.entidades.AmazonContext;
-import br.edu.ifpb.aleciano.interfaces.Context;
-import br.edu.ifpb.aleciano.interfaces.Strategy;
+import br.edu.ifpb.mysla.entidades.AmazonContext;
+import br.edu.ifpb.mysla.interfaces.Context;
+import br.edu.ifpb.mysla.interfaces.Strategy;
 
 public class CostOptimization implements Strategy {
 	AmazonContext amazonContext;

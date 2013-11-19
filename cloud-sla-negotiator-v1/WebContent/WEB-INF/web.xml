@@ -7,7 +7,7 @@
 		</description>
 		<display-name>RequestServlet</display-name>
 		<servlet-name>RequestServlet</servlet-name>
-		<servlet-class>br.edu.ifpb.aleciano.servlets.RequestServlet</servlet-class>
+		<servlet-class>br.edu.ifpb.mysla.servlets.RequestServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>RequestServlet</servlet-name>

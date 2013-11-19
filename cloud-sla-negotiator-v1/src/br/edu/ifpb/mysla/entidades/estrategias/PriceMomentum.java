@@ -1,4 +1,4 @@
-package br.edu.ifpb.aleciano.entidades.estrategias;
+package br.edu.ifpb.mysla.entidades.estrategias;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,25 +7,25 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
 
-import br.edu.ifpb.aleciano.entidades.AmazonContext;
-import br.edu.ifpb.aleciano.interfaces.Context;
-import br.edu.ifpb.aleciano.interfaces.Strategy;
+import br.edu.ifpb.mysla.entidades.AmazonContext;
+import br.edu.ifpb.mysla.interfaces.Context;
+import br.edu.ifpb.mysla.interfaces.Strategy;
 
-public class ImmediateAndUnintAcess implements Strategy {
+public class PriceMomentum implements Strategy {
 	AmazonContext amazonContext;
 	String name;
 	
 	
-	public ImmediateAndUnintAcess( ) {
-		super();
-		this.name = "Immediate and Uninterrupted Acess";
-		
-	}
-	
-	public ImmediateAndUnintAcess(AmazonContext amazonContext) {
+	public PriceMomentum(AmazonContext amazonContext) {
 		super();
 		this.amazonContext = amazonContext;
-		this.name = "Immediate Acess";
+		this.name = "Price Momentum";
+	}
+	
+	public PriceMomentum() {
+		super();
+		
+		this.name = "Price Momentum";
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class ImmediateAndUnintAcess implements Strategy {
 	public boolean play() {
 		
 		// Faça algo...
-				
+			
 		return true;
 	}
 

@@ -1,9 +1,9 @@
-package br.edu.ifpb.aleciano.entidades;
+package br.edu.ifpb.mysla.entidades;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-import br.edu.ifpb.aleciano.interfaces.Context;
+import br.edu.ifpb.mysla.interfaces.Context;
 
 public class AmazonContext implements Context {
 	private boolean immediateAccess;

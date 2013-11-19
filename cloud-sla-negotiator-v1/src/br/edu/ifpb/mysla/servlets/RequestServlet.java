@@ -1,4 +1,4 @@
-package br.edu.ifpb.aleciano.servlets;
+package br.edu.ifpb.mysla.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,10 +24,10 @@ import org.drools.logger.KnowledgeRuntimeLoggerFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.event.*;
 
-import br.edu.ifpb.aleciano.entidades.AmazonContext;
-import br.edu.ifpb.aleciano.entidades.EngineReq;
-import br.edu.ifpb.aleciano.interfaces.Context;
-import br.edu.ifpb.aleciano.interfaces.Strategy;
+import br.edu.ifpb.mysla.entidades.AmazonContext;
+import br.edu.ifpb.mysla.entidades.EngineReq;
+import br.edu.ifpb.mysla.interfaces.Context;
+import br.edu.ifpb.mysla.interfaces.Strategy;
 
 import com.google.gson.Gson;
 
@@ -228,9 +228,11 @@ public class RequestServlet extends HttpServlet {
 				.newKnowledgeBuilder();
 
 		/* Ler de um arquivo */
-		kbuilder.add(
+		/*kbuilder.add(
 				ResourceFactory.newFileResource(cx.getRealPath("/")
-						+ "WEB-INF/" + "regras.drl"), ResourceType.DRL);
+						+ "WEB-INF/" + "regras.drl"), ResourceType.DRL);*/
+		kbuilder.add(
+				ResourceFactory.newClassPathResource("rules/regras.drl"), ResourceType.DRL);
 
 		KnowledgeBuilderErrors errors = kbuilder.getErrors();
 		if (errors.size() > 0) {

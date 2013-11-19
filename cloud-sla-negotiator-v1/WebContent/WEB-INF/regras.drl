@@ -1,23 +1,23 @@
-package br.edu.ifpb.aleciano.regras;
+package br.edu.ifpb.mysla.regras;
 
-import br.edu.ifpb.aleciano.entidades.AmazonContext;
-import br.edu.ifpb.aleciano.entidades.EngineReq;
-import br.edu.ifpb.aleciano.interfaces.Strategy;
-import br.edu.ifpb.aleciano.entidades.estrategias.OnDemand;
-import br.edu.ifpb.aleciano.entidades.estrategias.PriceMomentum;
-import br.edu.ifpb.aleciano.entidades.estrategias.CostOptimization;
-import br.edu.ifpb.aleciano.entidades.estrategias.MinimizeInterruption;
-import br.edu.ifpb.aleciano.entidades.estrategias.ImmediateAndUnintAcess;
+import br.edu.ifpb.mysla.entidades.AmazonContext;
+import br.edu.ifpb.mysla.entidades.EngineReq;
+import br.edu.ifpb.mysla.interfaces.Strategy;
+import br.edu.ifpb.mysla.entidades.estrategias.OnDemand;
+import br.edu.ifpb.mysla.entidades.estrategias.PriceMomentum;
+import br.edu.ifpb.mysla.entidades.estrategias.CostOptimization;
+import br.edu.ifpb.mysla.entidades.estrategias.MinimizeInterruption;
+import br.edu.ifpb.mysla.entidades.estrategias.ImmediateAndUnintAcess;
  
 rule "Immediate Access for Short Duration"
 	when
     	$context: AmazonContext( (immediateAccess == true) && (shortDuration == true) )
       	$eng : EngineReq();
      	// Avalia se já existe a estratégia na engine, caso sim, não insere novamente.
-     	eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.estrategias.OnDemand.class) == false)   
+     	eval($eng.strategyExists(br.edu.ifpb.mysla.entidades.estrategias.OnDemand.class) == false)   
     then
-    	$eng.setProtocol(br.edu.ifpb.aleciano.entidades.protocolos.FixedPriceProto.class);
-        $eng.setStrategy($context, br.edu.ifpb.aleciano.entidades.estrategias.OnDemand.class);
+    	$eng.setProtocol(br.edu.ifpb.mysla.entidades.protocolos.FixedPriceProto.class);
+        $eng.setStrategy($context, br.edu.ifpb.mysla.entidades.estrategias.OnDemand.class);
         update($eng);
                 
 end
@@ -26,10 +26,10 @@ rule "Uninterrupted Access with Minimum Cost"
     when
        $context: AmazonContext( (uninterruptedAccess == true) && (minimizeCost == true)  )
        $eng : EngineReq();
-       eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.estrategias.MinimizeInterruption.class) == false)
+       eval($eng.strategyExists(br.edu.ifpb.mysla.entidades.estrategias.MinimizeInterruption.class) == false)
    	then
-   		$eng.setProtocol(br.edu.ifpb.aleciano.entidades.protocolos.SpotInstanceProto.class);
-        $eng.setStrategy($context, br.edu.ifpb.aleciano.entidades.estrategias.MinimizeInterruption.class);
+   		$eng.setProtocol(br.edu.ifpb.mysla.entidades.protocolos.SpotInstanceProto.class);
+        $eng.setStrategy($context, br.edu.ifpb.mysla.entidades.estrategias.MinimizeInterruption.class);
         update($eng);               
 end
 
@@ -37,11 +37,11 @@ rule "Minimize Job completion time and costraint"
     when
        $context: AmazonContext( (minimizeCompletionTime == true) && (minimizeCost == true) )
        $eng : EngineReq();
-       eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.estrategias.PriceMomentum.class) == false)
+       eval($eng.strategyExists(br.edu.ifpb.mysla.entidades.estrategias.PriceMomentum.class) == false)
        
     then
-    	$eng.setProtocol(br.edu.ifpb.aleciano.entidades.protocolos.SpotInstanceProto.class);
-        $eng.setStrategy($context, br.edu.ifpb.aleciano.entidades.estrategias.PriceMomentum.class);
+    	$eng.setProtocol(br.edu.ifpb.mysla.entidades.protocolos.SpotInstanceProto.class);
+        $eng.setStrategy($context, br.edu.ifpb.mysla.entidades.estrategias.PriceMomentum.class);
         update($eng);       
 end
 
@@ -49,10 +49,10 @@ rule "Minimize Cost and Job completion Time not a constraint"
     when
        $context: AmazonContext( (shortDuration == true) && (minimizeCost == true) )
        $eng : EngineReq();
-       eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.estrategias.CostOptimization.class) == false)
+       eval($eng.strategyExists(br.edu.ifpb.mysla.entidades.estrategias.CostOptimization.class) == false)
     then
-    	$eng.setProtocol(br.edu.ifpb.aleciano.entidades.protocolos.SpotInstanceProto.class);
-        $eng.setStrategy($context, br.edu.ifpb.aleciano.entidades.estrategias.CostOptimization.class);
+    	$eng.setProtocol(br.edu.ifpb.mysla.entidades.protocolos.SpotInstanceProto.class);
+        $eng.setStrategy($context, br.edu.ifpb.mysla.entidades.estrategias.CostOptimization.class);
         update($eng);      
 end
 
@@ -60,10 +60,10 @@ rule "Immediate and Uninterrupted Acess"
 	when
        $context: AmazonContext( (immediateAccess == true) && (uninterruptedAccess == true) )
        $eng : EngineReq();
-       eval($eng.strategyExists(br.edu.ifpb.aleciano.entidades.estrategias.ImmediateAndUnintAcess.class) == false)
+       eval($eng.strategyExists(br.edu.ifpb.mysla.entidades.estrategias.ImmediateAndUnintAcess.class) == false)
  	then
- 		$eng.setProtocol(br.edu.ifpb.aleciano.entidades.protocolos.SpotInstanceProto.class);
-       	$eng.setStrategy($context, br.edu.ifpb.aleciano.entidades.estrategias.ImmediateAndUnintAcess.class);
+ 		$eng.setProtocol(br.edu.ifpb.mysla.entidades.protocolos.SpotInstanceProto.class);
+       	$eng.setStrategy($context, br.edu.ifpb.mysla.entidades.estrategias.ImmediateAndUnintAcess.class);
        	update($eng);
                
 end

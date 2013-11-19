@@ -1,4 +1,4 @@
-package br.edu.ifpb.aleciano.entidades;
+package br.edu.ifpb.mysla.entidades;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
-import br.edu.ifpb.aleciano.interfaces.Context;
-import br.edu.ifpb.aleciano.interfaces.InteraProtocol;
-import br.edu.ifpb.aleciano.interfaces.Strategy;
+import br.edu.ifpb.mysla.interfaces.Context;
+import br.edu.ifpb.mysla.interfaces.InteraProtocol;
+import br.edu.ifpb.mysla.interfaces.Strategy;
 
 public class EngineReq {
 
