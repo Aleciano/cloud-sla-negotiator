@@ -1,7 +1,0 @@
-Strategy: Minimize Interruption
-Protocol: spotinstanceprotocol
-Instance type: t1.micro
-Num. of instances: 1
-Geo Zone: 1
-Login: gprc
-Wkey: [C@48521df3
