@@ -1,11 +1,11 @@
-package br.edu.ifpb.mysla.entidades;
+package br.edu.ifpb.mysla.teste;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import br.edu.ifpb.mysla.interfaces.Context;
 
-public class AmazonContext implements Context {
+public class SomeContext implements Context {
 	private boolean immediateAccess;
 	private boolean shortDuration;
 	private boolean uninterruptedAccess;
@@ -15,7 +15,7 @@ public class AmazonContext implements Context {
 	String instanceType;
 	int geoZone;
 
-	public AmazonContext(boolean immediateAccess, boolean duration,
+	public SomeContext(boolean immediateAccess, boolean duration,
 			boolean uninterruptedAcess, boolean minimizeCompletionTime,
 			boolean minimizeCost, int instancesNum, String instanceType,
 			int geoZsone) {
@@ -30,7 +30,7 @@ public class AmazonContext implements Context {
 		this.geoZone = geoZone;
 	}
 
-	public AmazonContext() {
+	public SomeContext() {
 		super();
 		this.immediateAccess = false;
 		this.shortDuration = false;

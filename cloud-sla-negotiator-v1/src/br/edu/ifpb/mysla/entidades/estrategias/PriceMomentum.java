@@ -51,7 +51,7 @@ public class PriceMomentum implements Strategy {
 		
 		// Faça algo...
 			
-		return true;
+		return false;
 	}
 
 }

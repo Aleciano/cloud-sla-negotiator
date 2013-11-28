@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="src" path="rules"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-oracle">
 		<attributes>
@@ -30,5 +31,6 @@
 	<classpathentry kind="lib" path="/home/junior/git/cloud-sla-negotiator/cloud-sla-negotiator-v1/WebContent/WEB-INF/lib/knowledge-internal-api.jar"/>
 	<classpathentry kind="lib" path="/home/junior/git/cloud-sla-negotiator/cloud-sla-negotiator-v1/WebContent/WEB-INF/lib/xstream.jar"/>
 	<classpathentry kind="lib" path="/home/junior/git/cloud-sla-negotiator/cloud-sla-negotiator-v1/WebContent/WEB-INF/lib/xmlpull.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

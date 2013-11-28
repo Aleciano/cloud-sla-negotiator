@@ -51,7 +51,7 @@ public class ImmediateAndUnintAcess implements Strategy {
 		
 		// Faça algo...
 				
-		return true;
+		return false;
 	}
 
 }

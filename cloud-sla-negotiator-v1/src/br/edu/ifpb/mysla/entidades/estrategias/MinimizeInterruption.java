@@ -50,7 +50,7 @@ public class MinimizeInterruption implements Strategy {
 		
 		// Faça algo...
 		
-		return true;
+		return false;
 	}
 
 }
