@@ -26,8 +26,33 @@ public class FixedPriceProto implements InteraProtocol {
 	}
 
 	@Override
-	public boolean makeProposal(Object data) {
+	public Object getData() {
 		// TODO Auto-generated method stub
+		return this.data;
+	}
+
+	@Override
+	public void setData(Object data) {
+		try{
+			if(data==null)
+				throw new NullPointerException();
+		}
+		catch(NullPointerException e){
+			throw e;
+		}
+		this.data = data;
+		
+	}
+	
+	@Override
+	public boolean makeProposal() {
+		try{
+			if(this.data==null)
+				throw new NullPointerException();
+		}
+		catch(NullPointerException e){
+			throw e;
+		}
 		return false;
 	}
 
@@ -48,5 +73,6 @@ public class FixedPriceProto implements InteraProtocol {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 
 }

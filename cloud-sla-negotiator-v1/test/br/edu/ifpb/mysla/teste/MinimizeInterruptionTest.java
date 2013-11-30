@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import br.edu.ifpb.mysla.entidades.AmazonContext;
+import br.edu.ifpb.mysla.entidades.estrategias.ImmediateAndUnintAcess;
 import br.edu.ifpb.mysla.entidades.estrategias.MinimizeInterruption;
 import br.edu.ifpb.mysla.interfaces.Context;
 
@@ -42,6 +43,14 @@ public class MinimizeInterruptionTest {
 		MinimizeInterruption strategy = new MinimizeInterruption();
 		strategy.setContext(context);
 	}
+	
+	@Test
+	public void testGetContext() {
+		MinimizeInterruption strategy = new MinimizeInterruption();
+		strategy.setContext(context);
+		assertEquals(strategy.getContext(), context);
+	}
+	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 	

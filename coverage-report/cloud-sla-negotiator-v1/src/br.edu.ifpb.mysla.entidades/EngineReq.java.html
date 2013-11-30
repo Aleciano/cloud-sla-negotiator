@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>EngineReq.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Nov 30, 2013 2:34:32 AM)</a> &gt; <a href="../../index.html" class="el_group">cloud-sla-negotiator-v1</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">br.edu.ifpb.mysla.entidades</a> &gt; <span class="el_source">EngineReq.java</span></div><h1>EngineReq.java</h1><pre class="source lang-java linenums">package br.edu.ifpb.mysla.entidades;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Random;
+
+import org.apache.commons.lang.math.RandomUtils;
+
+import com.sun.xml.internal.ws.api.pipe.NextAction;
+
+import br.edu.ifpb.mysla.interfaces.Context;
+import br.edu.ifpb.mysla.interfaces.InteraProtocol;
+import br.edu.ifpb.mysla.interfaces.Strategy;
+
+public class EngineReq {
+
+	private ArrayList&lt;InteraProtocol&gt; protocols;
+	private ArrayList&lt;Strategy&gt; strategies;
+	private Strategy strategy;
+	private InteraProtocol intera;
+
+	String login;
+	char[] wkey;
+
+	public EngineReq(ArrayList&lt;InteraProtocol&gt; protocol,
+			ArrayList&lt;Strategy&gt; strategies, String login, char[] wkey) {
+<span class="fc" id="L31">		super();</span>
+<span class="fc" id="L32">		this.protocols = protocol;</span>
+<span class="fc" id="L33">		this.strategies = strategies;</span>
+<span class="fc" id="L34">		this.login = login;</span>
+<span class="fc" id="L35">		this.wkey = wkey;</span>
+<span class="fc" id="L36">	}</span>
+
+	public EngineReq(InteraProtocol protocol, Strategy strategy, String login, char[] wkey) {
+<span class="fc" id="L39">		super();</span>
+<span class="fc" id="L40">		this.protocols = new ArrayList&lt;InteraProtocol&gt;();</span>
+<span class="fc" id="L41">		this.strategies = new ArrayList&lt;Strategy&gt;();</span>
+<span class="fc" id="L42">		this.strategies.add(strategy);</span>
+<span class="fc" id="L43">		this.protocols.add(protocol);</span>
+<span class="fc" id="L44">		this.strategy = strategy;</span>
+<span class="fc" id="L45">		this.intera = protocol;</span>
+<span class="fc" id="L46">		this.login = login;</span>
+<span class="fc" id="L47">		this.wkey = wkey;</span>
+<span class="fc" id="L48">	}</span>
+
+	public EngineReq(Strategy strategy) {
+<span class="fc" id="L51">		super();</span>
+<span class="fc" id="L52">		this.strategies = new ArrayList&lt;Strategy&gt;();</span>
+
+<span class="fc" id="L54">		this.strategies.add(strategy);</span>
+<span class="fc" id="L55">		this.login = &quot;guest&quot;;</span>
+<span class="fc" id="L56">		fillKey();</span>
+<span class="fc" id="L57">	}</span>
+
+	public EngineReq(InteraProtocol protocol) {
+<span class="fc" id="L60">		super();</span>
+<span class="fc" id="L61">		this.protocols = new ArrayList&lt;InteraProtocol&gt;();</span>
+
+<span class="fc" id="L63">		this.protocols.add(protocol);</span>
+<span class="fc" id="L64">		this.login = &quot;guest&quot;;</span>
+<span class="fc" id="L65">		fillKey();</span>
+<span class="fc" id="L66">	}</span>
+
+	public EngineReq() {
+<span class="fc" id="L69">		super();</span>
+
+<span class="fc" id="L71">		this.strategies = new ArrayList&lt;Strategy&gt;();</span>
+<span class="fc" id="L72">		this.protocols = new ArrayList&lt;InteraProtocol&gt;();</span>
+<span class="fc" id="L73">		this.login = &quot;guest&quot;;</span>
+<span class="fc" id="L74">		fillKey();</span>
+
+<span class="fc" id="L76">	}</span>
+
+	public void setProtocols(Collection&lt;InteraProtocol&gt; protocols) {
+<span class="fc" id="L79">		this.protocols = (ArrayList&lt;InteraProtocol&gt;) protocols;</span>
+<span class="fc" id="L80">	}</span>
+
+	public void setStrategies(Collection&lt;Strategy&gt; strategies) {
+<span class="fc" id="L83">		this.strategies = (ArrayList&lt;Strategy&gt;) strategies;</span>
+<span class="fc" id="L84">	}</span>
+
+	public void setProtocol(InteraProtocol protocol) {
+<span class="fc" id="L87">		this.protocols.add(protocol);</span>
+<span class="fc" id="L88">	}</span>
+
+	public void setStrategy(Strategy strategy) {
+<span class="fc" id="L91">		this.strategies.add(strategy);</span>
+<span class="fc" id="L92">	}</span>
+
+	public void setProtocol(Class&lt;? extends InteraProtocol&gt; cls)
+			throws InstantiationException, IllegalAccessException {
+
+<span class="fc" id="L97">		InteraProtocol proto = cls.newInstance(); // cria instância da tal</span>
+													// classe informada (o
+													// &quot;nome&quot; foi passado)
+
+<span class="fc" id="L101">		this.protocols.add(proto);</span>
+<span class="fc" id="L102">	}</span>
+
+	/*
+	 * Seta estratégia. Recebe como argumento alguma classe que estenda
+	 * 'Strategy'
+	 */
+	public void setStrategy(Context context, Class&lt;? extends Strategy&gt; cls)
+			throws InstantiationException, IllegalAccessException {
+
+<span class="fc" id="L111">		Strategy strat = cls.newInstance(); // cria instância da tal classe</span>
+											// informada (o &quot;nome&quot; foi passado)
+<span class="fc" id="L113">		strat.setContext(context); // seta contexto após a classe já criada</span>
+									// (necessita de construtor vazio)
+<span class="fc" id="L115">		this.strategies.add(strat);</span>
+<span class="fc" id="L116">	}</span>
+
+	public ArrayList&lt;InteraProtocol&gt; getProtocols() {
+<span class="fc" id="L119">		return protocols;</span>
+	}
+
+	public ArrayList&lt;Strategy&gt; getStrategies() {
+<span class="fc" id="L123">		return this.strategies;</span>
+	}
+
+	public String getProtocolName(int index) {
+<span class="fc" id="L127">		return this.protocols.get(index).getName();</span>
+	}
+
+	public String getStrategyName(int index) {
+<span class="fc" id="L131">		return this.strategies.get(index).getName();</span>
+	}
+
+	public String getLogin() {
+<span class="fc" id="L135">		return login;</span>
+	}
+
+	public void setLogin(String login) {
+<span class="fc" id="L139">		this.login = login;</span>
+<span class="fc" id="L140">	}</span>
+
+	public char[] getKey() {
+<span class="fc" id="L143">		return this.wkey;</span>
+	}
+
+	public boolean setKey(char[] key) {
+<span class="fc bfc" id="L147" title="All 2 branches covered.">		if (key.length &gt; 0) {</span>
+<span class="fc" id="L148">			this.wkey = key;</span>
+<span class="fc" id="L149">			return true;</span>
+		}
+<span class="fc" id="L151">		return false;</span>
+	}
+
+	/*
+	 * Insere qualquer dado na senha
+	 */
+	public void fillKey() {
+<span class="fc" id="L158">		char[] tempKey = new char[128];</span>
+<span class="fc" id="L159">		Random r = new Random();</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">		for (int i = 0; i &lt; 128; i++) {</span>
+<span class="fc" id="L161">			tempKey[i] = (char) r.nextInt(128 - i);</span>
+			//tempKey[i] = 0;
+		}
+<span class="fc" id="L164">		tempKey[127] = '\0';</span>
+<span class="fc" id="L165">		this.wkey = tempKey;</span>
+//		System.out.println(this.wkey.length);
+/*		for (int i = 0; i &lt; 128; i++) {
+			System.out.println(Character.toString(tempKey[i])+ &quot; &quot; + i);
+		}*/
+<span class="fc" id="L170">	}</span>
+
+	/*
+	 * Verifica se a estratégia já está na EngineReq.
+	 */
+	public boolean strategyExists(Class&lt;? extends Strategy&gt; cls) {
+<span class="pc bpc" id="L176" title="1 of 2 branches missed.">		if (this.strategies != null)</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">			for (Strategy str : this.strategies) {</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">				if (str.getClass() == cls)</span>
+<span class="fc" id="L179">					return true;</span>
+			}
+
+<span class="fc" id="L182">		return false;</span>
+	}
+
+	/*
+	 * Inicia o processo de requisição para obter instâncias utilizando
+	 * estratégia informado pelo índice indexOfStrategy.
+	 */
+	public boolean startRequest(int indexOfStrategy, int indexOfProtocol) throws IOException {
+		// TODO &quot;logar&quot; antes de executar estratégias
+		// Após &quot;logar&quot;, passar objetos de interação com o provedor para o
+		// &quot;play&quot; da estratégia.
+		
+<span class="pc bpc" id="L194" title="3 of 8 branches missed.">		if(( protocols==null || protocols.size() &lt; 1 ) || (strategies==null || strategies.size() &lt; 1 ) )</span>
+<span class="fc" id="L195">			return false;</span>
+<span class="fc" id="L196">		boolean result = false;</span>
+<span class="fc" id="L197">		int cont = new Random().nextInt(10);</span>
+<span class="fc" id="L198">		ArrayList&lt;String&gt; argv = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L199">		argv.add(Integer.toString(cont));</span>
+<span class="fc" id="L200">		argv.add(this.getLogin());</span>
+<span class="fc" id="L201">		argv.add(this.getKey().toString());</span>
+
+		/*
+		 * Se não conseguir escrever no log, então não é possível iniciar.
+		 */
+<span class="fc" id="L206">		if (writeLog(</span>
+<span class="fc" id="L207">				&quot;/home/junior/git/cloud-sla-negotiator/cloud-sla-negotiator-v1/src/logs/&quot;,</span>
+<span class="pc bpc" id="L208" title="1 of 2 branches missed.">				indexOfStrategy, indexOfProtocol, argv)) {</span>
+<span class="fc" id="L209">			result = this.strategies.get(indexOfStrategy).play();</span>
+		}
+		//TODO quando implementar as estratégias de fato, o ' return true ' deve ser alterado para ' return result'
+<span class="fc" id="L212">		return true;</span>
+	}
+
+	public boolean writeLog(String destination, int indexOfStrategy,
+			int indexOfProtocol, ArrayList&lt;String&gt; argv) throws IOException {
+		FileWriter fw;
+		try {
+<span class="fc bfc" id="L219" title="All 2 branches covered.">			if (argv.size() &gt; 0) {</span>
+<span class="fc" id="L220">				File file = new File(destination + argv.get(0) + &quot;.txt&quot;);</span>
+<span class="fc" id="L221">				file.delete(); // deleta caso o arquivo exista.</span>
+<span class="fc" id="L222">				fw = new FileWriter(file, false);</span>
+<span class="fc" id="L223">			} else{</span>
+<span class="fc" id="L224">				return false;</span>
+			}
+<span class="fc" id="L226">		} catch (IOException e) {</span>
+<span class="fc" id="L227">			throw e;</span>
+		}
+<span class="fc" id="L229">		PrintWriter arq = new PrintWriter(fw);</span>
+<span class="fc" id="L230">		arq.write(&quot;&quot;.toCharArray());</span>
+<span class="fc" id="L231">		arq.format(</span>
+<span class="fc" id="L232">				&quot;Strategy: %s\nProtocol: %s\nInstance type: %s\nNum. of instances: %s\nGeo Zone: %s\nLogin: %s\nWkey: %s&quot;,</span>
+<span class="fc" id="L233">				this.strategies.get(indexOfStrategy).getName(), this.protocols</span>
+<span class="fc" id="L234">						.get(indexOfProtocol).getName(),</span>
+<span class="fc" id="L235">				((AmazonContext) this.strategies.get(indexOfStrategy)</span>
+<span class="fc" id="L236">						.getContext()).getInstanceType(),</span>
+<span class="fc" id="L237">				((AmazonContext) this.strategies.get(indexOfStrategy)</span>
+<span class="fc" id="L238">						.getContext()).getInstancesNum(),</span>
+<span class="fc" id="L239">				((AmazonContext) this.strategies.get(indexOfStrategy)</span>
+<span class="fc" id="L240">						.getContext()).getGeoZone(), argv.get(1), argv.get(2));</span>
+<span class="fc" id="L241">		arq.close();</span>
+		try {
+<span class="fc" id="L243">			fw.close();</span>
+<span class="pc" id="L244">		} catch (IOException e) {</span>
+<span class="nc" id="L245">			throw e;</span>
+		}
+<span class="fc" id="L247">		return true;</span>
+
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.201306030806</span>test (Nov 30, 2013 2:34:32 AM)</div></body></html>

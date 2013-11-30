@@ -43,6 +43,13 @@ public class CostOptimizationTest {
 		CostOptimization strategy = new CostOptimization();
 		strategy.setContext(context);
 	}
+	
+	@Test
+	public void testGetContext() {
+		CostOptimization strategy = new CostOptimization();
+		strategy.setContext(context);
+		assertEquals(strategy.getContext(), context);
+	}
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 	

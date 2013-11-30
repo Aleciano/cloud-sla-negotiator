@@ -6,7 +6,6 @@ public class DiscountedFixedPriceProto implements InteraProtocol {
 	String name;
 	String version;
 	Object data;
-	
 
 	public DiscountedFixedPriceProto() {
 		super();
@@ -25,23 +24,46 @@ public class DiscountedFixedPriceProto implements InteraProtocol {
 		// TODO Auto-generated method stub
 		return this.version;
 	}
+	@Override
+	public Object getData() {
+		
+		return this.data;
+	}
+	
+	@Override
+	public void setData(Object data) {
+		try{
+			if(data==null)
+				throw new NullPointerException();
+		}
+		catch(NullPointerException e){
+			throw e;
+		}
+		this.data = data;
+	}
 
 	@Override
-	public boolean makeProposal(Object data) {
-		// TODO Auto-generated method stub
+	public boolean makeProposal() {
+		try{
+			if(this.data==null)
+				throw new NullPointerException();
+		}
+		catch(NullPointerException e){
+			throw e;
+		}
 		return false;
 	}
 
 	@Override
 	public void rejectInteration() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void rejectProposal() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -49,5 +71,7 @@ public class DiscountedFixedPriceProto implements InteraProtocol {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
 
 }

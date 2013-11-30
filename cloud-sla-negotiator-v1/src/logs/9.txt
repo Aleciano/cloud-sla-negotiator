@@ -1,0 +1,7 @@
+Strategy: On Demand
+Protocol: spotinstanceprotocol
+Instance type: t1.small
+Num. of instances: 1
+Geo Zone: 4
+Login: guest
+Wkey: [C@4c6e1034

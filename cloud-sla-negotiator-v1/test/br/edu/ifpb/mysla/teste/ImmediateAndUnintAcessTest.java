@@ -44,6 +44,13 @@ public class ImmediateAndUnintAcessTest {
 		strategy.setContext(context);
 	}
 	
+	@Test
+	public void testGetContext() {
+		ImmediateAndUnintAcess strategy = new ImmediateAndUnintAcess();
+		strategy.setContext(context);
+		assertEquals(strategy.getContext(), context);
+	}
+	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 	

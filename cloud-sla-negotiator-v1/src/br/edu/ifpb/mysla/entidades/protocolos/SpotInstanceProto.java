@@ -13,14 +13,6 @@ public class SpotInstanceProto implements InteraProtocol {
 		this.version = "0.1";
 	}
 
-	public Object getData() {
-		return data;
-	}
-
-	public void setData(Object data) {
-		this.data = data;
-	}
-
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
@@ -33,9 +25,29 @@ public class SpotInstanceProto implements InteraProtocol {
 		return this.version;
 	}
 
+	public Object getData() {
+		return this.data;
+	}
+
+	public void setData(Object data) {
+		try {
+			if (data == null)
+				throw new NullPointerException();
+		} catch (NullPointerException e) {
+			throw e;
+		}
+		this.data = data;
+	}
+
 	@Override
-	public boolean makeProposal(Object data) {
-		// TODO Auto-generated method stub
+	public boolean makeProposal() {
+		try{
+			if(this.data==null)
+				throw new NullPointerException();
+		}
+		catch(NullPointerException e){
+			throw e;
+		}
 		return false;
 	}
 
@@ -58,5 +70,3 @@ public class SpotInstanceProto implements InteraProtocol {
 	}
 
 }
-
-

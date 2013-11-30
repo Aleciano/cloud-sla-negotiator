@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import br.edu.ifpb.mysla.entidades.AmazonContext;
+import br.edu.ifpb.mysla.entidades.estrategias.MinimizeInterruption;
 import br.edu.ifpb.mysla.entidades.estrategias.OnDemand;
 import br.edu.ifpb.mysla.interfaces.Context;
 
@@ -44,6 +45,13 @@ public class OnDemandTest {
 		strategy.setContext(context);
 	}
 
+	@Test
+	public void testGetContext() {
+		OnDemand strategy = new OnDemand();
+		strategy.setContext(context);
+		assertEquals(strategy.getContext(), context);
+	}
+	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 

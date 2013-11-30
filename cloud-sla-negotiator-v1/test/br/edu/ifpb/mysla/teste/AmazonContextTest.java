@@ -76,4 +76,39 @@ public class AmazonContextTest {
 		assertEquals(AmazonContext.checkGeoZone(-1), false);
 	}
 
+	@Test
+	public void testeGettersAndSetters(){
+		AmazonContext amazonContext = new AmazonContext();
+		
+		amazonContext.setImmediateAccess(false);
+		assertEquals(amazonContext.isImmediateAccess(), false);
+		
+		amazonContext.setMinimizeCompletionTime(false);
+		assertEquals(amazonContext.isMinimizeCompletionTime(), false);
+		
+		amazonContext.setMinimizeCost(false);
+		assertEquals(amazonContext.isMinimizeCost(),false);
+			
+		amazonContext.setShortDuration(false);
+		assertEquals(amazonContext.isShortDuration(), false);
+		
+		amazonContext.setUninterruptedAccess(false);
+		assertEquals(amazonContext.isUninterruptedAccess(), false);
+		
+		assertTrue(amazonContext.setGeoZone(1));
+		assertFalse(amazonContext.setGeoZone(0));
+		assertEquals(amazonContext.getGeoZone(), 1);
+		
+		assertTrue(amazonContext.setInstancesNum(1));
+		assertFalse(amazonContext.setInstancesNum(-1));
+		assertEquals(amazonContext.getInstancesNum(),1);
+		
+		assertTrue(amazonContext.getInstanceType().equals(""));
+		amazonContext.setInstanceType("t1.small");
+		assertTrue(amazonContext.getInstanceType().equals("t1.small"));
+		
+		assertEquals(amazonContext.getContext(),amazonContext);
+		
+		
+	}
 }

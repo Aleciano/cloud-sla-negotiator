@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
+import org.apache.commons.lang.math.RandomUtils;
+
+import com.sun.xml.internal.ws.api.pipe.NextAction;
+
 import br.edu.ifpb.mysla.interfaces.Context;
 import br.edu.ifpb.mysla.interfaces.InteraProtocol;
 import br.edu.ifpb.mysla.interfaces.Strategy;
@@ -31,7 +35,7 @@ public class EngineReq {
 		this.wkey = wkey;
 	}
 
-	public EngineReq(InteraProtocol protocol, Strategy strategy) {
+	public EngineReq(InteraProtocol protocol, Strategy strategy, String login, char[] wkey) {
 		super();
 		this.protocols = new ArrayList<InteraProtocol>();
 		this.strategies = new ArrayList<Strategy>();
@@ -39,15 +43,24 @@ public class EngineReq {
 		this.protocols.add(protocol);
 		this.strategy = strategy;
 		this.intera = protocol;
-		this.login = "guest";
-		fillKey();
+		this.login = login;
+		this.wkey = wkey;
 	}
 
 	public EngineReq(Strategy strategy) {
 		super();
 		this.strategies = new ArrayList<Strategy>();
-		// this.protocolo = protocolo;
+
 		this.strategies.add(strategy);
+		this.login = "guest";
+		fillKey();
+	}
+
+	public EngineReq(InteraProtocol protocol) {
+		super();
+		this.protocols = new ArrayList<InteraProtocol>();
+
+		this.protocols.add(protocol);
 		this.login = "guest";
 		fillKey();
 	}
@@ -62,16 +75,30 @@ public class EngineReq {
 
 	}
 
-	public ArrayList<Strategy> getStrategies() {
-		return this.strategies;
+	public void setProtocols(Collection<InteraProtocol> protocols) {
+		this.protocols = (ArrayList<InteraProtocol>) protocols;
 	}
 
 	public void setStrategies(Collection<Strategy> strategies) {
 		this.strategies = (ArrayList<Strategy>) strategies;
 	}
 
+	public void setProtocol(InteraProtocol protocol) {
+		this.protocols.add(protocol);
+	}
+
 	public void setStrategy(Strategy strategy) {
 		this.strategies.add(strategy);
+	}
+
+	public void setProtocol(Class<? extends InteraProtocol> cls)
+			throws InstantiationException, IllegalAccessException {
+
+		InteraProtocol proto = cls.newInstance(); // cria instância da tal
+													// classe informada (o
+													// "nome" foi passado)
+
+		this.protocols.add(proto);
 	}
 
 	/*
@@ -88,22 +115,16 @@ public class EngineReq {
 		this.strategies.add(strat);
 	}
 
-	public void setProtocol(Class<? extends InteraProtocol> cls)
-			throws InstantiationException, IllegalAccessException {
-
-		InteraProtocol proto = cls.newInstance(); // cria instância da tal
-													// classe informada (o
-													// "nome" foi passado)
-
-		this.protocols.add(proto);
-	}
-
-	public ArrayList<InteraProtocol> getProtocol() {
+	public ArrayList<InteraProtocol> getProtocols() {
 		return protocols;
 	}
 
-	public void setProtocol(Collection<InteraProtocol> protocols) {
-		this.protocols = (ArrayList<InteraProtocol>) protocols;
+	public ArrayList<Strategy> getStrategies() {
+		return this.strategies;
+	}
+
+	public String getProtocolName(int index) {
+		return this.protocols.get(index).getName();
 	}
 
 	public String getStrategyName(int index) {
@@ -122,16 +143,30 @@ public class EngineReq {
 		return this.wkey;
 	}
 
-	public void setKey(char[] key) {
-		this.wkey = key;
+	public boolean setKey(char[] key) {
+		if (key.length > 0) {
+			this.wkey = key;
+			return true;
+		}
+		return false;
 	}
 
+	/*
+	 * Insere qualquer dado na senha
+	 */
 	public void fillKey() {
 		char[] tempKey = new char[128];
+		Random r = new Random();
 		for (int i = 0; i < 128; i++) {
-			tempKey[i] = (char) 0;
+			tempKey[i] = (char) r.nextInt(128 - i);
+			//tempKey[i] = 0;
 		}
-		wkey = tempKey;
+		tempKey[127] = '\0';
+		this.wkey = tempKey;
+//		System.out.println(this.wkey.length);
+/*		for (int i = 0; i < 128; i++) {
+			System.out.println(Character.toString(tempKey[i])+ " " + i);
+		}*/
 	}
 
 	/*
@@ -151,45 +186,52 @@ public class EngineReq {
 	 * Inicia o processo de requisição para obter instâncias utilizando
 	 * estratégia informado pelo índice indexOfStrategy.
 	 */
-	public boolean startRequest(int indexOfStrategy) {
+	public boolean startRequest(int indexOfStrategy, int indexOfProtocol) throws IOException {
 		// TODO "logar" antes de executar estratégias
 		// Após "logar", passar objetos de interação com o provedor para o
 		// "play" da estratégia.
-
+		
+		if(( protocols==null || protocols.size() < 1 ) || (strategies==null || strategies.size() < 1 ) )
+			return false;
+		boolean result = false;
 		int cont = new Random().nextInt(10);
 		ArrayList<String> argv = new ArrayList<String>();
 		argv.add(Integer.toString(cont));
 		argv.add(this.getLogin());
 		argv.add(this.getKey().toString());
 
-		writeLog(
+		/*
+		 * Se não conseguir escrever no log, então não é possível iniciar.
+		 */
+		if (writeLog(
 				"/home/junior/git/cloud-sla-negotiator/cloud-sla-negotiator-v1/src/logs/",
-				indexOfStrategy, argv);
-		boolean result = this.strategies.get(indexOfStrategy).play();
-
-		return result;
+				indexOfStrategy, indexOfProtocol, argv)) {
+			result = this.strategies.get(indexOfStrategy).play();
+		}
+		//TODO quando implementar as estratégias de fato, o ' return true ' deve ser alterado para ' return result'
+		return true;
 	}
 
 	public boolean writeLog(String destination, int indexOfStrategy,
-			ArrayList<String> argv) {
+			int indexOfProtocol, ArrayList<String> argv) throws IOException {
 		FileWriter fw;
 		try {
 			if (argv.size() > 0) {
 				File file = new File(destination + argv.get(0) + ".txt");
 				file.delete(); // deleta caso o arquivo exista.
 				fw = new FileWriter(file, false);
-			} else
-				fw = new FileWriter(new File(destination + "semnome" + ".txt"),
-						true);
+			} else{
+				return false;
+			}
 		} catch (IOException e) {
-			return false;
+			throw e;
 		}
 		PrintWriter arq = new PrintWriter(fw);
 		arq.write("".toCharArray());
 		arq.format(
 				"Strategy: %s\nProtocol: %s\nInstance type: %s\nNum. of instances: %s\nGeo Zone: %s\nLogin: %s\nWkey: %s",
-				this.strategies.get(indexOfStrategy).getName(),
-				this.protocols.get(0).getName(),
+				this.strategies.get(indexOfStrategy).getName(), this.protocols
+						.get(indexOfProtocol).getName(),
 				((AmazonContext) this.strategies.get(indexOfStrategy)
 						.getContext()).getInstanceType(),
 				((AmazonContext) this.strategies.get(indexOfStrategy)
@@ -200,7 +242,7 @@ public class EngineReq {
 		try {
 			fw.close();
 		} catch (IOException e) {
-			return false;
+			throw e;
 		}
 		return true;
 

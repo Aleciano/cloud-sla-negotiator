@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import br.edu.ifpb.mysla.entidades.AmazonContext;
+import br.edu.ifpb.mysla.entidades.estrategias.OnDemand;
 import br.edu.ifpb.mysla.entidades.estrategias.PriceMomentum;
 import br.edu.ifpb.mysla.interfaces.Context;
 
@@ -43,6 +44,14 @@ public class PriceMomentumTest {
 		PriceMomentum strategy = new PriceMomentum();
 		strategy.setContext(context);
 	}
+	
+	@Test
+	public void testGetContext() {
+		PriceMomentum strategy = new PriceMomentum();
+		strategy.setContext(context);
+		assertEquals(strategy.getContext(), context);
+	}
+	
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 

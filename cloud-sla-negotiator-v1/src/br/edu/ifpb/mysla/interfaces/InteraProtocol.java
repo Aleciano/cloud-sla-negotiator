@@ -7,8 +7,10 @@ public interface InteraProtocol {
 
 	String getName();
 	String getVersion();
+	Object getData();
+	void setData(Object data);
 	
-	boolean makeProposal(Object data);
+	boolean makeProposal();
 	void rejectInteration();
 	void rejectProposal();
 	boolean acceptProposal();

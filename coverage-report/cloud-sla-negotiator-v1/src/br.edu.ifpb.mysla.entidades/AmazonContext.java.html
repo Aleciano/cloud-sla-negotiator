@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>AmazonContext.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Nov 30, 2013 2:34:32 AM)</a> &gt; <a href="../../index.html" class="el_group">cloud-sla-negotiator-v1</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">br.edu.ifpb.mysla.entidades</a> &gt; <span class="el_source">AmazonContext.java</span></div><h1>AmazonContext.java</h1><pre class="source lang-java linenums">package br.edu.ifpb.mysla.entidades;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import br.edu.ifpb.mysla.interfaces.Context;
+
+public class AmazonContext implements Context {
+	private boolean immediateAccess;
+	private boolean shortDuration;
+	private boolean uninterruptedAccess;
+	private boolean minimizeCompletionTime;
+	private boolean minimizeCost;
+	private int instancesNum;
+	private String instanceType;
+	private int geoZone;
+
+<span class="fc" id="L18">	private static int maxGeoZones = 5;</span>
+<span class="fc" id="L19">	private static int maxInstancesNum = -1;</span>
+
+	public AmazonContext(boolean immediateAccess, boolean duration,
+			boolean uninterruptedAcess, boolean minimizeCompletionTime,
+			boolean minimizeCost, int instancesNum, String instanceType,
+			int geoZone) {
+<span class="fc" id="L25">		super();</span>
+<span class="fc" id="L26">		this.immediateAccess = immediateAccess;</span>
+<span class="fc" id="L27">		this.shortDuration = duration;</span>
+<span class="fc" id="L28">		this.uninterruptedAccess = uninterruptedAcess;</span>
+<span class="fc" id="L29">		this.minimizeCompletionTime = minimizeCompletionTime;</span>
+<span class="fc" id="L30">		this.minimizeCost = minimizeCost;</span>
+<span class="fc" id="L31">		this.instancesNum = instancesNum;</span>
+<span class="fc" id="L32">		this.instanceType = instanceType;</span>
+<span class="fc" id="L33">		this.geoZone = geoZone;</span>
+<span class="fc" id="L34">	}</span>
+
+	public AmazonContext() {
+<span class="fc" id="L37">		super();</span>
+<span class="fc" id="L38">		this.immediateAccess = false;</span>
+<span class="fc" id="L39">		this.shortDuration = false;</span>
+<span class="fc" id="L40">		this.uninterruptedAccess = false;</span>
+<span class="fc" id="L41">		this.minimizeCompletionTime = false;</span>
+<span class="fc" id="L42">		this.minimizeCost = false;</span>
+<span class="fc" id="L43">		this.instancesNum = 0;</span>
+<span class="fc" id="L44">		this.instanceType = &quot;&quot;;</span>
+<span class="fc" id="L45">		this.geoZone = 1;</span>
+<span class="fc" id="L46">	}</span>
+
+	/*
+	 * Checa se o valor de geoZone está dentro da faixa de valores suportados.
+	 * Pode ser acessado sem precisar de criar uma instância desta classe.
+	 */
+
+	public static boolean checkGeoZone(int geoZone) {
+<span class="fc bfc" id="L54" title="All 4 branches covered.">		if (geoZone &gt;= 1 &amp;&amp; geoZone &lt;= maxGeoZones)</span>
+<span class="fc" id="L55">			return true;</span>
+
+<span class="fc" id="L57">		return false;</span>
+	}
+
+	public boolean isImmediateAccess() {
+<span class="fc" id="L61">		return immediateAccess;</span>
+	}
+
+	public void setImmediateAccess(boolean immediateAccess) {
+<span class="fc" id="L65">		this.immediateAccess = immediateAccess;</span>
+<span class="fc" id="L66">	}</span>
+
+	public boolean isShortDuration() {
+<span class="fc" id="L69">		return shortDuration;</span>
+	}
+
+	public void setShortDuration(boolean duration) {
+<span class="fc" id="L73">		this.shortDuration = duration;</span>
+<span class="fc" id="L74">	}</span>
+
+	public boolean isUninterruptedAccess() {
+<span class="fc" id="L77">		return uninterruptedAccess;</span>
+	}
+
+	public void setUninterruptedAccess(boolean uninterruptedAccess) {
+<span class="fc" id="L81">		this.uninterruptedAccess = uninterruptedAccess;</span>
+<span class="fc" id="L82">	}</span>
+
+	public boolean isMinimizeCompletionTime() {
+<span class="fc" id="L85">		return minimizeCompletionTime;</span>
+	}
+
+	public void setMinimizeCompletionTime(boolean minimizeCompletionTime) {
+<span class="fc" id="L89">		this.minimizeCompletionTime = minimizeCompletionTime;</span>
+<span class="fc" id="L90">	}</span>
+
+	public boolean isMinimizeCost() {
+<span class="fc" id="L93">		return minimizeCost;</span>
+	}
+
+	public void setMinimizeCost(boolean minimizeCost) {
+<span class="fc" id="L97">		this.minimizeCost = minimizeCost;</span>
+<span class="fc" id="L98">	}</span>
+
+	public int getInstancesNum() {
+<span class="fc" id="L101">		return instancesNum;</span>
+	}
+
+	public boolean setInstancesNum(int instancesNum) {
+<span class="pc bpc" id="L105" title="1 of 4 branches missed.">		if (maxInstancesNum &lt; 0 &amp;&amp; instancesNum &gt; 0) {</span>
+<span class="fc" id="L106">			this.instancesNum = instancesNum;</span>
+<span class="fc" id="L107">			return true;</span>
+<span class="pc bpc" id="L108" title="3 of 4 branches missed.">		} else if (maxInstancesNum &gt; -1 &amp;&amp; instancesNum &lt;= maxInstancesNum) {</span>
+<span class="nc" id="L109">			this.instancesNum = instancesNum;</span>
+<span class="nc" id="L110">			return true;</span>
+		} else
+<span class="fc" id="L112">			return false;</span>
+	}
+
+	public String getInstanceType() {
+<span class="fc" id="L116">		return instanceType;</span>
+	}
+
+	public void setInstanceType(String instanceType) {
+<span class="fc" id="L120">		this.instanceType = instanceType;</span>
+<span class="fc" id="L121">	}</span>
+
+	public int getGeoZone() {
+<span class="fc" id="L124">		return geoZone;</span>
+	}
+
+	public boolean setGeoZone(int geoZone) {
+<span class="fc bfc" id="L128" title="All 2 branches covered.">		if (checkGeoZone(geoZone)) {</span>
+<span class="fc" id="L129">			this.geoZone = geoZone;</span>
+<span class="fc" id="L130">			return true;</span>
+		}
+<span class="fc" id="L132">		return false;</span>
+
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L138">		return &quot;SomeContext [immediateAccess=&quot; + immediateAccess</span>
+<span class="fc" id="L139">				+ &quot;, shortDuration=&quot; + shortDuration + &quot;, uninterruptedAccess=&quot;</span>
+<span class="fc" id="L140">				+ uninterruptedAccess + &quot;, minimizeCompletionTime=&quot;</span>
+<span class="fc" id="L141">				+ minimizeCompletionTime + &quot;, minimizeCost=&quot; + minimizeCost</span>
+<span class="fc" id="L142">				+ &quot;, instancesNum=&quot; + instancesNum + &quot;, instanceType=&quot;</span>
+<span class="fc" id="L143">				+ instanceType + &quot;, geoZone=&quot; + geoZone + &quot;]&quot;;</span>
+	}
+
+	@Override
+	public Context getContext() {
+		// TODO Auto-generated method stub
+<span class="fc" id="L149">		return this;</span>
+	}
+
+	@Override
+	public void setContext(Collection&lt;Object&gt; objects) {
+		try {
+<span class="fc" id="L155">			this.immediateAccess = (boolean) ((ArrayList) (objects)).get(0);</span>
+<span class="fc" id="L156">			this.shortDuration = (boolean) ((ArrayList) (objects)).get(1);</span>
+<span class="fc" id="L157">			this.uninterruptedAccess = (boolean) ((ArrayList) (objects)).get(2);</span>
+<span class="fc" id="L158">			this.minimizeCompletionTime = (boolean) ((ArrayList) (objects))</span>
+<span class="fc" id="L159">					.get(3);</span>
+<span class="fc" id="L160">			this.minimizeCost = (boolean) ((ArrayList) (objects)).get(4);</span>
+<span class="fc" id="L161">			this.instancesNum = (int) ((ArrayList) (objects)).get(5);</span>
+<span class="fc" id="L162">			this.instanceType = (String) ((ArrayList) (objects)).get(6);</span>
+<span class="fc" id="L163">			this.geoZone = (int) ((ArrayList) (objects)).get(7);</span>
+<span class="fc" id="L164">		} catch (ClassCastException e) {</span>
+<span class="fc" id="L165">			throw e;</span>
+
+		}
+<span class="fc" id="L168">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.201306030806</span>test (Nov 30, 2013 2:34:32 AM)</div></body></html>

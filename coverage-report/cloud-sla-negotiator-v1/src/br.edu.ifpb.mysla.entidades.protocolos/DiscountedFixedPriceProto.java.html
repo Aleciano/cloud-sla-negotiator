@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>DiscountedFixedPriceProto.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Nov 30, 2013 2:34:32 AM)</a> &gt; <a href="../../index.html" class="el_group">cloud-sla-negotiator-v1</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">br.edu.ifpb.mysla.entidades.protocolos</a> &gt; <span class="el_source">DiscountedFixedPriceProto.java</span></div><h1>DiscountedFixedPriceProto.java</h1><pre class="source lang-java linenums">package br.edu.ifpb.mysla.entidades.protocolos;
+
+import br.edu.ifpb.mysla.interfaces.InteraProtocol;
+
+public class DiscountedFixedPriceProto implements InteraProtocol {
+	String name;
+	String version;
+	Object data;
+
+	public DiscountedFixedPriceProto() {
+<span class="fc" id="L11">		super();</span>
+<span class="fc" id="L12">		this.name = &quot;discountedfixedpriceprotocol&quot;;</span>
+<span class="fc" id="L13">		this.version = &quot;0.1&quot;;</span>
+<span class="fc" id="L14">	}</span>
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+<span class="fc" id="L19">		return this.name;</span>
+	}
+
+	@Override
+	public String getVersion() {
+		// TODO Auto-generated method stub
+<span class="fc" id="L25">		return this.version;</span>
+	}
+	@Override
+	public Object getData() {
+		
+<span class="fc" id="L30">		return this.data;</span>
+	}
+	
+	@Override
+	public void setData(Object data) {
+		try{
+<span class="fc bfc" id="L36" title="All 2 branches covered.">			if(data==null)</span>
+<span class="fc" id="L37">				throw new NullPointerException();</span>
+		}
+<span class="fc" id="L39">		catch(NullPointerException e){</span>
+<span class="fc" id="L40">			throw e;</span>
+		}
+<span class="fc" id="L42">		this.data = data;</span>
+<span class="fc" id="L43">	}</span>
+
+	@Override
+	public boolean makeProposal() {
+		try{
+<span class="fc bfc" id="L48" title="All 2 branches covered.">			if(this.data==null)</span>
+<span class="fc" id="L49">				throw new NullPointerException();</span>
+		}
+<span class="fc" id="L51">		catch(NullPointerException e){</span>
+<span class="fc" id="L52">			throw e;</span>
+		}
+<span class="fc" id="L54">		return false;</span>
+	}
+
+	@Override
+	public void rejectInteration() {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L61">	}</span>
+
+	@Override
+	public void rejectProposal() {
+		// TODO Auto-generated method stub
+
+<span class="nc" id="L67">	}</span>
+
+	@Override
+	public boolean acceptProposal() {
+		// TODO Auto-generated method stub
+<span class="fc" id="L72">		return false;</span>
+	}
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.201306030806</span>test (Nov 30, 2013 2:34:32 AM)</div></body></html>

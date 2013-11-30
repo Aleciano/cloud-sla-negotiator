@@ -11,14 +11,17 @@ public class AmazonContext implements Context {
 	private boolean uninterruptedAccess;
 	private boolean minimizeCompletionTime;
 	private boolean minimizeCost;
-	int instancesNum;
-	String instanceType;
-	int geoZone;
+	private int instancesNum;
+	private String instanceType;
+	private int geoZone;
+
+	private static int maxGeoZones = 5;
+	private static int maxInstancesNum = -1;
 
 	public AmazonContext(boolean immediateAccess, boolean duration,
 			boolean uninterruptedAcess, boolean minimizeCompletionTime,
 			boolean minimizeCost, int instancesNum, String instanceType,
-			int geoZsone) {
+			int geoZone) {
 		super();
 		this.immediateAccess = immediateAccess;
 		this.shortDuration = duration;
@@ -48,9 +51,9 @@ public class AmazonContext implements Context {
 	 */
 
 	public static boolean checkGeoZone(int geoZone) {
-		if (geoZone >= 1 && geoZone <= 5)
+		if (geoZone >= 1 && geoZone <= maxGeoZones)
 			return true;
-			
+
 		return false;
 	}
 
@@ -98,8 +101,15 @@ public class AmazonContext implements Context {
 		return instancesNum;
 	}
 
-	public void setInstancesNum(int instancesNum) {
-		this.instancesNum = instancesNum;
+	public boolean setInstancesNum(int instancesNum) {
+		if (maxInstancesNum < 0 && instancesNum > 0) {
+			this.instancesNum = instancesNum;
+			return true;
+		} else if (maxInstancesNum > -1 && instancesNum <= maxInstancesNum) {
+			this.instancesNum = instancesNum;
+			return true;
+		} else
+			return false;
 	}
 
 	public String getInstanceType() {
@@ -114,8 +124,13 @@ public class AmazonContext implements Context {
 		return geoZone;
 	}
 
-	public void setGeoZone(int geoZone) {
-		this.geoZone = geoZone;
+	public boolean setGeoZone(int geoZone) {
+		if (checkGeoZone(geoZone)) {
+			this.geoZone = geoZone;
+			return true;
+		}
+		return false;
+
 	}
 
 	@Override
@@ -148,7 +163,7 @@ public class AmazonContext implements Context {
 			this.geoZone = (int) ((ArrayList) (objects)).get(7);
 		} catch (ClassCastException e) {
 			throw e;
-					
+
 		}
 	}
 

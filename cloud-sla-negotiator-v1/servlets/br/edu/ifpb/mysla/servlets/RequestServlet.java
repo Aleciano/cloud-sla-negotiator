@@ -65,74 +65,74 @@ public class RequestServlet extends HttpServlet {
 		switch (flag) {
 		case "login": {
 			HttpSession session = request.getSession();
-			
+
 			EngineReq engine = new EngineReq();
 			session.setAttribute("engine", engine);
 
 			Context context = createContextByArgs(request);
-			if (context==null){
+			if (context == null) {
 				RequestDispatcher r = request
 						.getRequestDispatcher("WEB-INF/results.jsp");
 				request.setCharacterEncoding("UTF-8");
-				
+
 				request.setAttribute("strategy", null);
 				r.forward(request, response);
-			}
-			else{
-			try {
-				// load up the knowledge base
-				KnowledgeBase kbase = readKnowledgeBase();
+			} else {
+				try {
+					// load up the knowledge base
+					KnowledgeBase kbase = readKnowledgeBase();
 
-				StatefulKnowledgeSession ksession = kbase
-						.newStatefulKnowledgeSession();
+					StatefulKnowledgeSession ksession = kbase
+							.newStatefulKnowledgeSession();
 
-				KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory
-						.newFileLogger(ksession, "test");
-				// go !
+					KnowledgeRuntimeLogger logger = KnowledgeRuntimeLoggerFactory
+							.newFileLogger(ksession, "test");
+					// go !
 
-				ksession.insert(context);
-				ksession.insert(engine);
-				ksession.fireAllRules(); // permanece executando enquanto as
-											// regras
-											// estão trabalhando..
-				// System.out.println("Após o fire das regras..");
-				logger.close();
+					ksession.insert(context);
+					ksession.insert(engine);
+					ksession.fireAllRules(); // permanece executando enquanto as
+												// regras
+												// estão trabalhando..
+					// System.out.println("Após o fire das regras..");
+					logger.close();
 
-				if (engine.getStrategies().size() > 0) {
-					// for (Strategy str : engine.getStrategies()) {
-					// TODO add array de estratégias e passa pro JSP de
-					// seleção
+					if (engine.getStrategies().size() > 0) {
+						// for (Strategy str : engine.getStrategies()) {
+						// TODO add array de estratégias e passa pro JSP de
+						// seleção
 
-					/*
-					 * out.println("\nEstratégia " + str.getName() +
-					 * " é aplicável.");
-					 */
-					// }
+						/*
+						 * out.println("\nEstratégia " + str.getName() +
+						 * " é aplicável.");
+						 */
+						// }
 
-					request.setAttribute("conflict", engine.getStrategies()
-							.size() > 1 ? "yes" : "no");
-					engine.setLogin(request.getParameter("login"));
-					engine.setKey(request.getParameter("key").toCharArray());
-					request.setAttribute("strategies", engine.getStrategies());
-					session.setAttribute("engine", engine);
-					// request.setAttribute("code", 1);
-					RequestDispatcher r = request
-							.getRequestDispatcher("WEB-INF/strategy_selection.jsp");
-					request.setCharacterEncoding("UTF-8");
-					r.forward(request, response);
+						request.setAttribute("conflict", engine.getStrategies()
+								.size() > 1 ? "yes" : "no");
+						engine.setLogin(request.getParameter("login"));
+						engine.setKey(request.getParameter("key").toCharArray());
+						request.setAttribute("strategies",
+								engine.getStrategies());
+						session.setAttribute("engine", engine);
+						// request.setAttribute("code", 1);
+						RequestDispatcher r = request
+								.getRequestDispatcher("WEB-INF/strategy_selection.jsp");
+						request.setCharacterEncoding("UTF-8");
+						r.forward(request, response);
 
-				} else {
-					session.setAttribute("strategies", null);
-					request.setAttribute("strategy", null);
-					RequestDispatcher r = request
-							.getRequestDispatcher("WEB-INF/results.jsp");
-					request.setCharacterEncoding("UTF-8");
-					r.forward(request, response);
+					} else {
+						session.setAttribute("strategies", null);
+						request.setAttribute("strategy", null);
+						RequestDispatcher r = request
+								.getRequestDispatcher("WEB-INF/results.jsp");
+						request.setCharacterEncoding("UTF-8");
+						r.forward(request, response);
 
+					}
+				} catch (Throwable t) {
+					t.printStackTrace();
 				}
-			} catch (Throwable t) {
-				t.printStackTrace();
-			}
 			}
 			break;
 		}
@@ -147,14 +147,14 @@ public class RequestServlet extends HttpServlet {
 			EngineReq engine = (EngineReq) session.getAttribute("engine");
 			int index = Integer
 					.parseInt(request.getParameter("strategy_index"));
-			if (engine != null && engine.startRequest(index)) {
+			if (engine != null && engine.startRequest(index, index)) {
 				// TODO manda pro JSP de resultados a estratégia escolhida e
 				// ativada.
 				session.setAttribute("strategy",
 						engine.getStrategies().get(index));
 				request.setAttribute("strategy",
 						engine.getStrategies().get(index));
-				
+
 				RequestDispatcher r = request
 						.getRequestDispatcher("WEB-INF/results.jsp");
 				request.setCharacterEncoding("UTF-8");
@@ -169,10 +169,11 @@ public class RequestServlet extends HttpServlet {
 				 */
 				engine.toString(); // nada
 			}
-		}
+
 			break;
 		}
-		// out.println("</body></html>");
+
+		}
 
 	}
 
@@ -191,7 +192,8 @@ public class RequestServlet extends HttpServlet {
 																		// marcação
 																		// (checkbox)
 																		// html.
-		if (contextValues==null) return null;
+		if (contextValues == null)
+			return null;
 		String json = "{"; // Inicia String do Json
 
 		/*
@@ -228,11 +230,12 @@ public class RequestServlet extends HttpServlet {
 				.newKnowledgeBuilder();
 
 		/* Ler de um arquivo */
-		/*kbuilder.add(
-				ResourceFactory.newFileResource(cx.getRealPath("/")
-						+ "WEB-INF/" + "regras.drl"), ResourceType.DRL);*/
-		kbuilder.add(
-				ResourceFactory.newClassPathResource("rules/regras.drl"), ResourceType.DRL);
+		/*
+		 * kbuilder.add( ResourceFactory.newFileResource(cx.getRealPath("/") +
+		 * "WEB-INF/" + "regras.drl"), ResourceType.DRL);
+		 */
+		kbuilder.add(ResourceFactory.newClassPathResource("rules/regras.drl"),
+				ResourceType.DRL);
 
 		KnowledgeBuilderErrors errors = kbuilder.getErrors();
 		if (errors.size() > 0) {
