@@ -1,0 +1,14 @@
+### Output ###
+Strategy: Minimize Interruption
+Protocol: spotinstanceprotocol
+### Input ###
+immediateAccess: true
+shortDuration: false
+uninterruptedAccess: true
+minimizeCompletionTime: false
+minimizeCost:true
+instancesNum: 2
+instanceType: m1.medium
+geoZone: 1
+Login: gprc
+Wkey: [C@1ea6cbb2

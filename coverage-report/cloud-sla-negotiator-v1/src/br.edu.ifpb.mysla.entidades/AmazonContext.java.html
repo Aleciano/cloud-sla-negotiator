@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>AmazonContext.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Nov 30, 2013 2:34:32 AM)</a> &gt; <a href="../../index.html" class="el_group">cloud-sla-negotiator-v1</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">br.edu.ifpb.mysla.entidades</a> &gt; <span class="el_source">AmazonContext.java</span></div><h1>AmazonContext.java</h1><pre class="source lang-java linenums">package br.edu.ifpb.mysla.entidades;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>AmazonContext.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">test (Dec 2, 2013 2:04:04 PM)</a> &gt; <a href="../../index.html" class="el_group">cloud-sla-negotiator-v1</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">br.edu.ifpb.mysla.entidades</a> &gt; <span class="el_source">AmazonContext.java</span></div><h1>AmazonContext.java</h1><pre class="source lang-java linenums">package br.edu.ifpb.mysla.entidades;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -135,37 +135,39 @@ public class AmazonContext implements Context {
 
 	@Override
 	public String toString() {
-<span class="fc" id="L138">		return &quot;SomeContext [immediateAccess=&quot; + immediateAccess</span>
-<span class="fc" id="L139">				+ &quot;, shortDuration=&quot; + shortDuration + &quot;, uninterruptedAccess=&quot;</span>
-<span class="fc" id="L140">				+ uninterruptedAccess + &quot;, minimizeCompletionTime=&quot;</span>
-<span class="fc" id="L141">				+ minimizeCompletionTime + &quot;, minimizeCost=&quot; + minimizeCost</span>
-<span class="fc" id="L142">				+ &quot;, instancesNum=&quot; + instancesNum + &quot;, instanceType=&quot;</span>
-<span class="fc" id="L143">				+ instanceType + &quot;, geoZone=&quot; + geoZone + &quot;]&quot;;</span>
+<span class="fc" id="L138">		return &quot;immediateAccess: &quot; + immediateAccess</span>
+<span class="fc" id="L139">				+ &quot;\nshortDuration: &quot; + shortDuration + &quot;\nuninterruptedAccess: &quot;</span>
+<span class="fc" id="L140">				+ uninterruptedAccess + &quot;\nminimizeCompletionTime: &quot;</span>
+<span class="fc" id="L141">				+ minimizeCompletionTime + &quot;\nminimizeCost:&quot; + minimizeCost</span>
+<span class="fc" id="L142">				+ &quot;\ninstancesNum: &quot; + instancesNum + &quot;\ninstanceType: &quot;</span>
+<span class="fc" id="L143">				+ instanceType + &quot;\ngeoZone: &quot; + geoZone ;</span>
 	}
+	
+	
 
 	@Override
 	public Context getContext() {
 		// TODO Auto-generated method stub
-<span class="fc" id="L149">		return this;</span>
+<span class="fc" id="L151">		return this;</span>
 	}
 
 	@Override
 	public void setContext(Collection&lt;Object&gt; objects) {
 		try {
-<span class="fc" id="L155">			this.immediateAccess = (boolean) ((ArrayList) (objects)).get(0);</span>
-<span class="fc" id="L156">			this.shortDuration = (boolean) ((ArrayList) (objects)).get(1);</span>
-<span class="fc" id="L157">			this.uninterruptedAccess = (boolean) ((ArrayList) (objects)).get(2);</span>
-<span class="fc" id="L158">			this.minimizeCompletionTime = (boolean) ((ArrayList) (objects))</span>
-<span class="fc" id="L159">					.get(3);</span>
-<span class="fc" id="L160">			this.minimizeCost = (boolean) ((ArrayList) (objects)).get(4);</span>
-<span class="fc" id="L161">			this.instancesNum = (int) ((ArrayList) (objects)).get(5);</span>
-<span class="fc" id="L162">			this.instanceType = (String) ((ArrayList) (objects)).get(6);</span>
-<span class="fc" id="L163">			this.geoZone = (int) ((ArrayList) (objects)).get(7);</span>
-<span class="fc" id="L164">		} catch (ClassCastException e) {</span>
-<span class="fc" id="L165">			throw e;</span>
+<span class="fc" id="L157">			this.immediateAccess = (boolean) ((ArrayList) (objects)).get(0);</span>
+<span class="fc" id="L158">			this.shortDuration = (boolean) ((ArrayList) (objects)).get(1);</span>
+<span class="fc" id="L159">			this.uninterruptedAccess = (boolean) ((ArrayList) (objects)).get(2);</span>
+<span class="fc" id="L160">			this.minimizeCompletionTime = (boolean) ((ArrayList) (objects))</span>
+<span class="fc" id="L161">					.get(3);</span>
+<span class="fc" id="L162">			this.minimizeCost = (boolean) ((ArrayList) (objects)).get(4);</span>
+<span class="fc" id="L163">			this.instancesNum = (int) ((ArrayList) (objects)).get(5);</span>
+<span class="fc" id="L164">			this.instanceType = (String) ((ArrayList) (objects)).get(6);</span>
+<span class="fc" id="L165">			this.geoZone = (int) ((ArrayList) (objects)).get(7);</span>
+<span class="fc" id="L166">		} catch (ClassCastException e) {</span>
+<span class="fc" id="L167">			throw e;</span>
 
 		}
-<span class="fc" id="L168">	}</span>
+<span class="fc" id="L170">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.201306030806</span>test (Nov 30, 2013 2:34:32 AM)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.6.3.201306030806</span>test (Dec 2, 2013 2:04:04 PM)</div></body></html>

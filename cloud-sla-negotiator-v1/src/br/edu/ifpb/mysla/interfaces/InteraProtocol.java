@@ -15,9 +15,4 @@ public interface InteraProtocol {
 	void rejectProposal();
 	boolean acceptProposal();
 	
-	
-	
-	
-	
-
 }

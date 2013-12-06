@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 
 import br.edu.ifpb.mysla.entidades.AmazonContext;
 import br.edu.ifpb.mysla.entidades.EngineReq;
-import br.edu.ifpb.mysla.entidades.estrategias.ImmediateAndUnintAcess;
+import br.edu.ifpb.mysla.entidades.estrategias.Reserved;
 import br.edu.ifpb.mysla.entidades.estrategias.OnDemand;
 import br.edu.ifpb.mysla.entidades.estrategias.PriceMomentum;
 import br.edu.ifpb.mysla.entidades.protocolos.DiscountedFixedPriceProto;
@@ -135,7 +135,7 @@ public class EngineReqTest {
 		assertTrue(size > 0);
 		ArrayList<Strategy> arrayOfStrategies = new ArrayList<Strategy>();
 		arrayOfStrategies.add(someStrategy);
-		ImmediateAndUnintAcess anotherStrategy = new ImmediateAndUnintAcess();
+		Reserved anotherStrategy = new Reserved();
 		arrayOfStrategies.add(anotherStrategy);
 		engine.setStrategies(arrayOfStrategies);
 		size = engine.getStrategies().size();
@@ -282,7 +282,7 @@ public class EngineReqTest {
 		engine = new EngineReq();
 
 		ArrayList<String> argv = new ArrayList<String>();
-		argv.add(Integer.toString(-1));
+		argv.add("test-"+Integer.toString(1));
 		argv.add("test");
 		argv.add("passtest");
 		ArrayList<Object> objects;
@@ -299,7 +299,7 @@ public class EngineReqTest {
 		AmazonContext amazonContext = new AmazonContext();
 		amazonContext.setContext(objects);
 		InteraProtocol someProtocol = new SpotInstanceProto();
-		Strategy someStrategy = new OnDemand(amazonContext);
+		Strategy someStrategy = new PriceMomentum(amazonContext);
 		engine.setStrategy(someStrategy);
 		engine.setProtocol(someProtocol);
 		System.out.println(engine.getProtocols().size());
@@ -316,7 +316,7 @@ public class EngineReqTest {
 	public void testStartRequestIndexError() throws IOException {
 		exception.expect(IndexOutOfBoundsException.class);
 		engine = new EngineReq();
-		InteraProtocol someProtocol = new SpotInstanceProto();
+		InteraProtocol someProtocol = new FixedPriceProto();
 		Strategy someStrategy = new OnDemand();
 		engine.setStrategy(someStrategy);
 		engine.setProtocol(someProtocol);
@@ -331,7 +331,7 @@ public class EngineReqTest {
 		
 		assertFalse(engine.writeLog("??", 0, 0, argv));
 		
-		argv.add(Integer.toString(-2));
+		argv.add("test-"+Integer.toString(2));
 		argv.add("test");
 		argv.add("passtest");
 		ArrayList<Object> objects;
@@ -349,7 +349,7 @@ public class EngineReqTest {
 		amazonContext.setContext(objects);
 
 		engine.setStrategy(new OnDemand(amazonContext));
-		engine.setProtocol(new SpotInstanceProto());
+		engine.setProtocol(new FixedPriceProto());
 		assertTrue(engine
 				.writeLog(
 						"/home/junior/git/cloud-sla-negotiator/cloud-sla-negotiator-v1/src/logs/",
@@ -361,7 +361,7 @@ public class EngineReqTest {
 		exception.expect(IOException.class);
 		engine = new EngineReq();
 		ArrayList<String> argv = new ArrayList<String>();
-		argv.add(Integer.toString(-3));
+		argv.add("test-"+Integer.toString(3));
 		argv.add("test");
 		argv.add("passtest");
 		/*
@@ -385,7 +385,7 @@ public class EngineReqTest {
 		exception.expect(IndexOutOfBoundsException.class);
 		engine = new EngineReq();
 		ArrayList<String> argv = new ArrayList<String>();
-		argv.add(Integer.toString(-4));
+		argv.add("test-"+Integer.toString(4));
 		argv.add("test");
 		argv.add("passtest");
 

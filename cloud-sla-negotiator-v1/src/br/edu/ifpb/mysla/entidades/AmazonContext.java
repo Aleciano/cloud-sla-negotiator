@@ -135,13 +135,15 @@ public class AmazonContext implements Context {
 
 	@Override
 	public String toString() {
-		return "SomeContext [immediateAccess=" + immediateAccess
-				+ ", shortDuration=" + shortDuration + ", uninterruptedAccess="
-				+ uninterruptedAccess + ", minimizeCompletionTime="
-				+ minimizeCompletionTime + ", minimizeCost=" + minimizeCost
-				+ ", instancesNum=" + instancesNum + ", instanceType="
-				+ instanceType + ", geoZone=" + geoZone + "]";
+		return "immediateAccess: " + immediateAccess
+				+ "\nshortDuration: " + shortDuration + "\nuninterruptedAccess: "
+				+ uninterruptedAccess + "\nminimizeCompletionTime: "
+				+ minimizeCompletionTime + "\nminimizeCost:" + minimizeCost
+				+ "\ninstancesNum: " + instancesNum + "\ninstanceType: "
+				+ instanceType + "\ngeoZone: " + geoZone ;
 	}
+	
+	
 
 	@Override
 	public Context getContext() {

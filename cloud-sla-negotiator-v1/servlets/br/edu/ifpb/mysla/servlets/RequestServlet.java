@@ -64,6 +64,7 @@ public class RequestServlet extends HttpServlet {
 		String flag = request.getParameter("flag");
 		switch (flag) {
 		case "login": {
+			long procTime = System.currentTimeMillis();
 			HttpSession session = request.getSession();
 
 			EngineReq engine = new EngineReq();
@@ -79,9 +80,11 @@ public class RequestServlet extends HttpServlet {
 				r.forward(request, response);
 			} else {
 				try {
+					long procTimeKnowledge = System.currentTimeMillis();
 					// load up the knowledge base
 					KnowledgeBase kbase = readKnowledgeBase();
-
+					procTimeKnowledge = System.currentTimeMillis() - procTimeKnowledge;
+					
 					StatefulKnowledgeSession ksession = kbase
 							.newStatefulKnowledgeSession();
 
@@ -130,6 +133,8 @@ public class RequestServlet extends HttpServlet {
 						r.forward(request, response);
 
 					}
+					procTime = System.currentTimeMillis() - procTime;
+					//System.out.printf("\n-> Complete Processing Time: %d\n-> Processing time of Knowledge base: %d\n", procTime,procTimeKnowledge);
 				} catch (Throwable t) {
 					t.printStackTrace();
 				}

@@ -1,0 +1,14 @@
+### Output ###
+Strategy: Reserved
+Protocol: discountedfixedpriceprotocol
+### Input ###
+immediateAccess: true
+shortDuration: false
+uninterruptedAccess: true
+minimizeCompletionTime: false
+minimizeCost:true
+instancesNum: 1
+instanceType: m1.medium
+geoZone: 3
+Login: gprc
+Wkey: [C@7abdd265

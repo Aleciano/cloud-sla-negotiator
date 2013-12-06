@@ -4,8 +4,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Random;
 
 import org.apache.commons.lang.math.RandomUtils;
@@ -35,7 +39,8 @@ public class EngineReq {
 		this.wkey = wkey;
 	}
 
-	public EngineReq(InteraProtocol protocol, Strategy strategy, String login, char[] wkey) {
+	public EngineReq(InteraProtocol protocol, Strategy strategy, String login,
+			char[] wkey) {
 		super();
 		this.protocols = new ArrayList<InteraProtocol>();
 		this.strategies = new ArrayList<Strategy>();
@@ -98,7 +103,7 @@ public class EngineReq {
 													// classe informada (o
 													// "nome" foi passado)
 
-		this.protocols.add(proto);
+		this.setProtocol(proto);
 	}
 
 	/*
@@ -112,7 +117,7 @@ public class EngineReq {
 											// informada (o "nome" foi passado)
 		strat.setContext(context); // seta contexto após a classe já criada
 									// (necessita de construtor vazio)
-		this.strategies.add(strat);
+		this.setStrategy(strat);
 	}
 
 	public ArrayList<InteraProtocol> getProtocols() {
@@ -159,14 +164,15 @@ public class EngineReq {
 		Random r = new Random();
 		for (int i = 0; i < 128; i++) {
 			tempKey[i] = (char) r.nextInt(128 - i);
-			//tempKey[i] = 0;
+			// tempKey[i] = 0;
 		}
 		tempKey[127] = '\0';
 		this.wkey = tempKey;
-//		System.out.println(this.wkey.length);
-/*		for (int i = 0; i < 128; i++) {
-			System.out.println(Character.toString(tempKey[i])+ " " + i);
-		}*/
+
+		/*
+		 * for (int i = 0; i < 128; i++) {
+		 * System.out.println(Character.toString(tempKey[i])+ " " + i); }
+		 */
 	}
 
 	/*
@@ -186,29 +192,43 @@ public class EngineReq {
 	 * Inicia o processo de requisição para obter instâncias utilizando
 	 * estratégia informado pelo índice indexOfStrategy.
 	 */
-	public boolean startRequest(int indexOfStrategy, int indexOfProtocol) throws IOException {
+	public boolean startRequest(int indexOfStrategy, int indexOfProtocol)
+			throws IOException {
 		// TODO "logar" antes de executar estratégias
 		// Após "logar", passar objetos de interação com o provedor para o
 		// "play" da estratégia.
-		
-		if(( protocols==null || protocols.size() < 1 ) || (strategies==null || strategies.size() < 1 ) )
+
+		if ((protocols == null || protocols.size() < 1)
+				|| (strategies == null || strategies.size() < 1))
 			return false;
 		boolean result = false;
-		int cont = new Random().nextInt(10);
+		// the string representation of date (month/day/year)
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		// Get the date today using Calendar object.
+		Date today = Calendar.getInstance().getTime();
+		String cont = df.format(today);
+		cont = cont.replace(":", "");
+		cont = cont.replace("/", "");
+		cont = cont.replace(" ", "_");
+		// int cont = new Random().nextInt(10);
 		ArrayList<String> argv = new ArrayList<String>();
-		argv.add(Integer.toString(cont));
+		argv.add(cont);
 		argv.add(this.getLogin());
 		argv.add(this.getKey().toString());
 
 		/*
 		 * Se não conseguir escrever no log, então não é possível iniciar.
 		 */
-		if (writeLog(
-				"/home/junior/git/cloud-sla-negotiator/cloud-sla-negotiator-v1/src/logs/",
+		String save = System.getProperty("user.home");
+		File f = new File(save+"/logs-cloud_sla_negotiator");
+		
+		f.mkdirs();
+		if (writeLog(save + "/logs-cloud_sla_negotiator/",
 				indexOfStrategy, indexOfProtocol, argv)) {
 			result = this.strategies.get(indexOfStrategy).play();
 		}
-		//TODO quando implementar as estratégias de fato, o ' return true ' deve ser alterado para ' return result'
+		// TODO quando implementar as estratégias de fato, o ' return true '
+		// deve ser alterado para ' return result'
 		return true;
 	}
 
@@ -220,7 +240,7 @@ public class EngineReq {
 				File file = new File(destination + argv.get(0) + ".txt");
 				file.delete(); // deleta caso o arquivo exista.
 				fw = new FileWriter(file, false);
-			} else{
+			} else {
 				return false;
 			}
 		} catch (IOException e) {
@@ -228,16 +248,14 @@ public class EngineReq {
 		}
 		PrintWriter arq = new PrintWriter(fw);
 		arq.write("".toCharArray());
+
 		arq.format(
-				"Strategy: %s\nProtocol: %s\nInstance type: %s\nNum. of instances: %s\nGeo Zone: %s\nLogin: %s\nWkey: %s",
+				"### Output ###\nStrategy: %s\nProtocol: %s\n### Input ###\n%s\nLogin: %s\nWkey: %s",
 				this.strategies.get(indexOfStrategy).getName(), this.protocols
 						.get(indexOfProtocol).getName(),
-				((AmazonContext) this.strategies.get(indexOfStrategy)
-						.getContext()).getInstanceType(),
-				((AmazonContext) this.strategies.get(indexOfStrategy)
-						.getContext()).getInstancesNum(),
-				((AmazonContext) this.strategies.get(indexOfStrategy)
-						.getContext()).getGeoZone(), argv.get(1), argv.get(2));
+				this.strategies.get(indexOfStrategy).getContext().toString(),
+				argv.get(1), argv.get(2));
+
 		arq.close();
 		try {
 			fw.close();

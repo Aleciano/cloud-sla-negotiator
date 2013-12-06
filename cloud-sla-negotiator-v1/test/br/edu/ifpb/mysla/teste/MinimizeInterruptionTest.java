@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import br.edu.ifpb.mysla.entidades.AmazonContext;
-import br.edu.ifpb.mysla.entidades.estrategias.ImmediateAndUnintAcess;
+import br.edu.ifpb.mysla.entidades.estrategias.Reserved;
 import br.edu.ifpb.mysla.entidades.estrategias.MinimizeInterruption;
 import br.edu.ifpb.mysla.interfaces.Context;
 

@@ -1,0 +1,14 @@
+### Output ###
+Strategy: Cost Optimization
+Protocol: spotinstanceprotocol
+### Input ###
+immediateAccess: false
+shortDuration: true
+uninterruptedAccess: false
+minimizeCompletionTime: false
+minimizeCost:true
+instancesNum: 3
+instanceType: m1.medium
+geoZone: 5
+Login: gprc
+Wkey: [C@66cc3c53

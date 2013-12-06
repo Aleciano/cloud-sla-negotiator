@@ -11,18 +11,18 @@ import br.edu.ifpb.mysla.entidades.AmazonContext;
 import br.edu.ifpb.mysla.interfaces.Context;
 import br.edu.ifpb.mysla.interfaces.Strategy;
 
-public class ImmediateAndUnintAcess implements Strategy {
+public class Reserved implements Strategy {
 	AmazonContext amazonContext;
 	String name;
 	
 	
-	public ImmediateAndUnintAcess( ) {
+	public Reserved( ) {
 		super();
-		this.name = "Immediate and Uninterrupted Acess";
+		this.name = "Reserved";
 		
 	}
 	
-	public ImmediateAndUnintAcess(AmazonContext amazonContext) {
+	public Reserved(AmazonContext amazonContext) {
 		super();
 		this.amazonContext = amazonContext;
 		this.name = "Immediate Acess";

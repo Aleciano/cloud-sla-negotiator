@@ -7,7 +7,7 @@ import br.edu.ifpb.mysla.entidades.estrategias.OnDemand;
 import br.edu.ifpb.mysla.entidades.estrategias.PriceMomentum;
 import br.edu.ifpb.mysla.entidades.estrategias.CostOptimization;
 import br.edu.ifpb.mysla.entidades.estrategias.MinimizeInterruption;
-import br.edu.ifpb.mysla.entidades.estrategias.ImmediateAndUnintAcess;
+import br.edu.ifpb.mysla.entidades.estrategias.Reserved;
  
 rule "Immediate Access for Short Duration"
 	when
@@ -21,6 +21,7 @@ rule "Immediate Access for Short Duration"
         update($eng);
                 
 end
+
 
 rule "Uninterrupted Access with Minimum Cost"
     when
@@ -56,14 +57,17 @@ rule "Minimize Cost and Job completion Time not a constraint"
         update($eng);      
 end
 
-rule "Immediate and Uninterrupted Acess"
+rule "Immediate, Uninterrupted and Low Cost Acess"
 	when
-       $context: AmazonContext( (immediateAccess == true) && (uninterruptedAccess == true) )
+       $context: AmazonContext( (immediateAccess == true) && (uninterruptedAccess == true) && (minimizeCost == true))
        $eng : EngineReq();
-       eval($eng.strategyExists(br.edu.ifpb.mysla.entidades.estrategias.ImmediateAndUnintAcess.class) == false)
+       eval($eng.strategyExists(br.edu.ifpb.mysla.entidades.estrategias.Reserved.class) == false)
  	then
- 		$eng.setProtocol(br.edu.ifpb.mysla.entidades.protocolos.SpotInstanceProto.class);
-       	$eng.setStrategy($context, br.edu.ifpb.mysla.entidades.estrategias.ImmediateAndUnintAcess.class);
+ 		$eng.setProtocol(br.edu.ifpb.mysla.entidades.protocolos.DiscountedFixedPriceProto.class);
+       	$eng.setStrategy($context, br.edu.ifpb.mysla.entidades.estrategias.Reserved.class);
        	update($eng);
                
 end
+
+
+

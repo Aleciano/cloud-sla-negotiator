@@ -1,0 +1,14 @@
+### Output ###
+Strategy: Price Momentum
+Protocol: spotinstanceprotocol
+### Input ###
+immediateAccess: false
+shortDuration: false
+uninterruptedAccess: true
+minimizeCompletionTime: true
+minimizeCost:true
+instancesNum: 4
+instanceType: m1.medium
+geoZone: 1
+Login: gprc
+Wkey: [C@66b21aae

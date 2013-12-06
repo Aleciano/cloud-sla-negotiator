@@ -11,10 +11,10 @@ import org.junit.rules.ExpectedException;
 
 import br.edu.ifpb.mysla.entidades.AmazonContext;
 import br.edu.ifpb.mysla.entidades.estrategias.CostOptimization;
-import br.edu.ifpb.mysla.entidades.estrategias.ImmediateAndUnintAcess;
+import br.edu.ifpb.mysla.entidades.estrategias.Reserved;
 import br.edu.ifpb.mysla.interfaces.Context;
 
-public class ImmediateAndUnintAcessTest {
+public class ReservedTest {
 	ArrayList<Object> objects;
 	Context context;
 	@Before
@@ -34,19 +34,19 @@ public class ImmediateAndUnintAcessTest {
 	}
 
 	@Test
-	public void testImmediateAndUnintAcessAmazonContext() {
-		ImmediateAndUnintAcess strategy = new ImmediateAndUnintAcess((AmazonContext)context);
+	public void testReservedAmazonContext() {
+		Reserved strategy = new Reserved((AmazonContext)context);
 	}
 
 	@Test
 	public void testSetContext() {
-		ImmediateAndUnintAcess strategy = strategy = new ImmediateAndUnintAcess();
+		Reserved strategy = strategy = new Reserved();
 		strategy.setContext(context);
 	}
 	
 	@Test
 	public void testGetContext() {
-		ImmediateAndUnintAcess strategy = new ImmediateAndUnintAcess();
+		Reserved strategy = new Reserved();
 		strategy.setContext(context);
 		assertEquals(strategy.getContext(), context);
 	}
@@ -57,19 +57,19 @@ public class ImmediateAndUnintAcessTest {
 	@Test
 	public void testSetContextAnother() {
 		exception.expect(ClassCastException.class);
-		ImmediateAndUnintAcess strategy = new ImmediateAndUnintAcess();
+		Reserved strategy = new Reserved();
 		strategy.setContext(new SomeContext());
 	}
 
 	@Test
 	public void testGetName() {
-		ImmediateAndUnintAcess strategy = new ImmediateAndUnintAcess();
-		assertEquals(strategy.getName(), "Immediate and Uninterrupted Acess");
+		Reserved strategy = new Reserved();
+		assertEquals(strategy.getName(), "Reserved");
 	}
 
 	@Test
 	public void testPlay() {
-		ImmediateAndUnintAcess strategy = new ImmediateAndUnintAcess();
+		Reserved strategy = new Reserved();
 		assertEquals(strategy.play(), false);
 	}
 
