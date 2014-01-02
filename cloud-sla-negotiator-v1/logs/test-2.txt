@@ -1,0 +1,14 @@
+### Output ###
+Strategy: On Demand
+Protocol: fixedpriceprotocol
+### Input ###
+immediateAccess: true
+shortDuration: true
+uninterruptedAccess: true
+minimizeCompletionTime: false
+minimizeCost:false
+instancesNum: 1
+instanceType: t1.small
+geoZone: 4
+Login: test
+Wkey: passtest
